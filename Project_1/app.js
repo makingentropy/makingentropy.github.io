@@ -6,15 +6,56 @@ $(()=>{
 
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL FUNCTIONS:
+  const initBoard=()=>{
+    let $board=$("<div>").text("player 1").css(cssBoard).appendTo("body");
+  }
+  const rCreateDeckArr=()=>{
+    let arr=[];
+    for(i=1;i<=13;i++){
+      if(notRoyal(i)){
+        arr.push(i);
+      }
+      else{
+        arr.push(royals[i]);
+      }
+    }
+    return arr;
+  }
 
+/////////////////////////////// HELPER FUNC:
+  const notRoyal=(n)=>{ //preserving brain power when tired
+    if(n>1&&n<11){return true;}
+    else{return false;}
+  }
 
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL VARIABLES:
+  let deck1=[];
+  let deck2=[];
+  const royals={
+    A:1,   1:"A",
+    J:11, 11:"J",
+    Q:12, 12:"Q",
+    K:13, 13:"K"
+  }
 
-
-//  ///////////////////////////////
 /////////////////////////////// CSS:
+  let cssBoard={
+    "display":"flex-inline",
+    "background-color":"black",
+    "height":"500px",
+    "width":"500px"
+  }
+  //  ///////////////////////////////
+  /////////////////////////////// TESTING:
+  dbg(royals.Q); dbg
+  dbg(royals[12]);
 
+  //  ///////////////////////////////
+  /////////////////////////////// GAMEPLAY:
+  initBoard();
+deck1=rCreateDeckArr(); dbg(deck1);
+deck2=rCreateDeckArr(); dbg(deck2);
 
 
 })//EOF

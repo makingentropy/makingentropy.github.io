@@ -1,0 +1,80 @@
+Straight Path to Power
+original design by echance 2016.18.07
+author retains all copyright
+
+This is a multiplayer card game that revolves around the idea that you must
+build straights that serve as paths to both a win condition and grant access to
+new abilities.
+
+Each player begins with their own complete decks of cards that each contain
+2 jokers.
+
+Each player begins by searching their deck for an Ace of their choosing
+and places it on the table in front of them.  This is the start of their
+first path.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+The player begins by drawing 3 cards, and building on their path,
+or starting a new one.
+
+A path is a straight from A to any number as high as 10,
+that has two defining characteristics:
+
+--being in an OPEN state- Where the Ace is a different suit from all the other
+cards in its path
+
+-- being in a CLOSED state- Where both the Ace and Top card share a suit, but
+that suit is different from all other cards in their path
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+The Ace, alone, is considered both a closed and open path.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+S P E C I A L cards:
+Joker:
+    A joker may be played at any time it is in one's hand.
+      Ability:
+        * Remove top card from any target path, it is shuffled into owner's
+        deck.
+          --Price:
+
+Ace:
+        Ability: besides starting a path, it can be played to
+          *Discard target player's hand
+        --Price: Discard Ace and own entire hand.
+- - - - - - - - -
+
+Royals:
+    Class: Royals may only be played when player has one or more closed paths
+    -BUT only royals of a closed path's Ace suit.
+    --EXCEPT a King may ONLY be played when its parent path is built to 10
+
+    Jacks and Queens can be played at any path length from A-10, provided
+    it is a CLOSED path.
+
+Jack Abilities:
+      * Take one card of choice from ANY discard pile (including
+      opponent) and put it into your hand
+        -OR-
+      * Take top card from your OWN closed path and put it into your
+      hand.
+    --Price: shuffle Jack back into your deck. Reshuffle.
+
+Queen Abilities:
+      *Reshuffle any open path of opponent back into their deck
+        -OR-
+      *Reshuffle target player's hand into their own deck
+      (leaving them empty-handed)
+    --Price: DISCARD Queen
+
+    King Abilities:
+      *Steal top card of any player's OPEN path, including one's own, and put
+      into own hand
+        -OR-
+      *Take any non-royal card from own graveyard and put into hand
+    --Price: shuffle King back into your deck. Reshuffle.
+
+
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+win: capture an opponent's Ace
+win: build 3 paths to 10
+lose: no more cards in deck AND no more cards in hand.

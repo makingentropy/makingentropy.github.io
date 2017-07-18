@@ -2,6 +2,30 @@ Straight Path to Power
 original design by echance 2016.18.07
 author retains all copyright
 
+MVP:
+
+You have your own deck of cards, so does your opponent.
+
+Win condition: build 3 straights from A to K before your opponent, where
+each straight begins and ends in the same suit but all the intermediary cards
+are of different suits in any combination.
+
+Game play (turn-based):
+You begin the game with one ace on the board, of any suit you choose.
+
+Your turn begins by drawing three cards, this is mandatory. You may choose to
+draw up to four more cards after that, but you must decide on the number of
+additional draws all at once- not see what you get one card at a time.
+Any time you find an ace, you may start a new straight on the board.
+At the end of your turn, you must discard any cards beyond the 7th.
+If the turn ends with no cards in your deck, shuffle
+your current hand into your discard pile, and reshuffle the discard pile for use
+as your new deck.
+
+Lose condition: if you need to reshuffle your deck a fourth time, you lose.
+________________________________________________________________________
+EXPANDED:
+
 This is a multiplayer card game that revolves around the idea that you must
 build straights that serve as paths to both a win condition and grant access to
 new abilities.

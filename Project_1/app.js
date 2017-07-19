@@ -27,7 +27,6 @@ const draw=(deck,hand,totalNumCards)=>{
   }
 }
 const divHandMaker=(hand)=>{ //
-  dbg(hand);
   for (var i = 0; i < hand.length; i++) {
     const card=$("<div/>").addClass(".cards").css(cssCard);
       $(card).text(hand[i]);
@@ -40,7 +39,9 @@ const divHandMaker=(hand)=>{ //
 const clickedInHand=(card, hand)=>{
   dbg("clickedInHand, card: "+card.text());
 }
+const turn=()=>{
 
+}
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
         if(n>1&&n<11){return true;}
@@ -75,21 +76,31 @@ const clickedInHand=(card, hand)=>{
   }
   let hand1=[];
   let hand2=[];
+  let player1={
+    name:"Player 1",
+    hand:[],
+    deck:[]
+  };
+  let player2={
+    name:"Player 2",
+    hand:[],
+    deck:[]
+  };
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
     "display":"flex-inline",
     "background-color":"#002200",
     "height":"500px",
-    "width":"500px"
+    "width":"550px"
   }
   let cssHandHolder={ //#handholder
     "display":"flex",
     "align-items": "center",
     "justify-content": "center",
     "background-color":"#C04000",
-    "height":"120px",
-    "widith":"300px",
+    "height":"25%",
+    "widith":"80%",
     "border":"5px solid #A02000"
   }
   let cssCard={ //.cards
@@ -109,13 +120,15 @@ const clickedInHand=(card, hand)=>{
 
 //  ///////////////////////////////
 /////////////////////////////// GAMEPLAY:
-  initBoard();
-deck1=rCreateDeckArr(); //dbg(deck1);
-deck2=rCreateDeckArr(); //dbg(deck2);
-draw(deck1,hand1,3);
-divHandMaker(hand1);
+initBoard();
+player1.deck=rCreateDeckArr(); //dbg(deck1);
+player2.deck=rCreateDeckArr(); //dbg(deck2);
 
+draw(player1.deck,player1.hand,3);
+divHandMaker(player1.hand);
 
+dbg(player1);
+dbg(player2);
 
 })//EOF
 //  ///////////////////////////////

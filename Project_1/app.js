@@ -30,17 +30,15 @@ const divHandMaker=(hand)=>{ //
   dbg(hand);
   for (var i = 0; i < hand.length; i++) {
     const card=$("<div/>").addClass(".cards").css(cssCard);
-    if(notRoyal(hand[i])){
       $(card).text(hand[i]);
-    }
     card.appendTo($("#handholder"));
       card.on("click",(e)=>{
-        clickedInHand(card, hand);
+        clickedInHand(card);
     })
   }
 }
 const clickedInHand=(card, hand)=>{
-
+  dbg("clickedInHand, card: "+card.text());
 }
 
 /////////////////////////////// HELPER FUNC:
@@ -79,14 +77,22 @@ const clickedInHand=(card, hand)=>{
   let hand2=[];
 
 /////////////////////////////// CSS:
-  let cssBoard={
+  let cssBoard={ //#board
     "display":"flex-inline",
     "background-color":"#002200",
     "height":"500px",
     "width":"500px"
   }
-  let cssCard={
-    "display":"flex-inline",
+  let cssHandHolder={ //#handholder
+    "display":"flex",
+    "align-items": "center",
+    "justify-content": "center",
+    "background-color":"#C04000",
+    "height":"120px",
+    "widith":"300px",
+    "border":"5px solid #A02000"
+  }
+  let cssCard={ //.cards
     "background-color":"white",
     "font-size":"2.5em",
     "height":"100px",
@@ -96,15 +102,7 @@ const clickedInHand=(card, hand)=>{
     "line-height":"100px",
     "vertical-align":"middle",
   }
-  let cssHandHolder={
-    "display":"flex-inline",
-    "align-items": "center",
-    "justify-content": "center",
-    "background-color":"#C04000",
-    "height":"120px",
-    "widith":"300px",
-    "border":"5px solid #A02000"
-  }
+
 //  ///////////////////////////////
 /////////////////////////////// TESTING:
 // dbg(royals.Q); dbg(royals[12]);

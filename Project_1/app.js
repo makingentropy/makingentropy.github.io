@@ -7,16 +7,17 @@ const dbg=(s)=>{if(true){console.log(s);}} //set to false to hide debug logs
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL FUNCTIONS:
 const initBoard=()=>{
-    let $board=$("<div>").text("player 1").css(cssBoard).appendTo("body");
+    let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
+    let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
   }
-  const rCreateDeckArr=()=>{
-    let arr=[];
-    for(i=1;i<=13;i++){
-      if(notRoyal(i)){arr.push(i);}
-      else{arr.push(royals[i]);}
-    }
-    return arr;
+const rCreateDeckArr=()=>{
+  let arr=[];
+  for(i=1;i<=13;i++){
+    if(notRoyal(i)){arr.push(i);}
+    else{arr.push(royals[i]);}
   }
+  return arr;
+}
 const draw=(deck,hand,totalNumCards)=>{
   let r;
   for (let i = 1; i <=totalNumCards; i++) {
@@ -24,6 +25,21 @@ const draw=(deck,hand,totalNumCards)=>{
     hand.push(deck[r]);
     deck.splice(r,1); //remove card from deck
   }
+}
+const divHandMaker=(hand)=>{ //
+  dbg(hand);
+  for (var i = 0; i < hand.length; i++) {
+    const card=$("<div/>").addClass(".cards").css(cssCard);
+    if(notRoyal(hand[i])){
+      $(card).text(hand[i]);
+    }
+    card.appendTo($("#handholder"));
+      card.on("click",(e)=>{
+        clickedInHand(card, hand);
+    })
+  }
+}
+const clickedInHand=(card, hand)=>{
 
 }
 
@@ -65,9 +81,29 @@ const draw=(deck,hand,totalNumCards)=>{
 /////////////////////////////// CSS:
   let cssBoard={
     "display":"flex-inline",
-    "background-color":"black",
+    "background-color":"#002200",
     "height":"500px",
     "width":"500px"
+  }
+  let cssCard={
+    "display":"flex-inline",
+    "background-color":"white",
+    "font-size":"2.5em",
+    "height":"100px",
+    "width":"60px",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"100px",
+    "vertical-align":"middle",
+  }
+  let cssHandHolder={
+    "display":"flex-inline",
+    "align-items": "center",
+    "justify-content": "center",
+    "background-color":"#C04000",
+    "height":"120px",
+    "widith":"300px",
+    "border":"5px solid #A02000"
   }
 //  ///////////////////////////////
 /////////////////////////////// TESTING:
@@ -78,6 +114,8 @@ const draw=(deck,hand,totalNumCards)=>{
   initBoard();
 deck1=rCreateDeckArr(); //dbg(deck1);
 deck2=rCreateDeckArr(); //dbg(deck2);
+draw(deck1,hand1,3);
+divHandMaker(hand1);
 
 
 

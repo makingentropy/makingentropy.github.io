@@ -9,6 +9,7 @@ const dbg=(s)=>{if(true){console.log(s);}} //set to false to hide debug logs
 const initBoard=()=>{
     let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
+    let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
   }
 const rCreateDeckArr=()=>{
   let arr=[];
@@ -39,8 +40,12 @@ const divHandMaker=(hand)=>{ //
 const clickedInHand=(card, hand)=>{
   dbg("clickedInHand, card: "+card.text());
 }
-const turn=()=>{
-
+const turn=(player)=>{
+  draw(player.deck,player.hand,3);
+  divHandMaker(player.hand);
+  dbg("Player: "+player.name);
+  dbg("Player: "+player.deck);
+  dbg("Player: "+player.hand);
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -86,6 +91,7 @@ const turn=()=>{
     hand:[],
     deck:[]
   };
+  let isGameOn=true;
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
@@ -103,11 +109,21 @@ const turn=()=>{
     "widith":"80%",
     "border":"5px solid #A02000"
   }
+  let cssPlayHolder={ //#handholder
+    "display":"flex",
+    "align-items": "center",
+    "justify-content": "center",
+    "background-color":"#501000",
+    "height":"25%",
+    "widith":"80%",
+    "border":"5px solid #A02000"
+  }
   let cssCard={ //.cards
     "background-color":"white",
     "font-size":"2.5em",
     "height":"100px",
     "width":"60px",
+    "border-radius":"10%",
     "border":"3px solid #87C7A5",
     "text-align":"center",
     "line-height":"100px",
@@ -124,11 +140,12 @@ initBoard();
 player1.deck=rCreateDeckArr(); //dbg(deck1);
 player2.deck=rCreateDeckArr(); //dbg(deck2);
 
-draw(player1.deck,player1.hand,3);
-divHandMaker(player1.hand);
+// while(isGameOn){
+  turn(player1);
+// }
 
-dbg(player1);
-dbg(player2);
+
+
 
 })//EOF
 //  ///////////////////////////////

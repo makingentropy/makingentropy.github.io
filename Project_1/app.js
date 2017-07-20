@@ -37,15 +37,66 @@ const divHandMaker=(hand)=>{ //
     })
   }
 }
+const playHolderMaker=(hand)=>{ //
+  for (var i = 0; i <3; )
+  for (var i = 0; i < hand.length; i++) {
+    const card=$("<div/>").addClass(".cards").css(cssCard);
+      $(card).text(hand[i]);
+    card.appendTo($("#handholder"));
+      card.on("click",(e)=>{
+        clickedInHand(card);
+    })
+  }
+}
 const clickedInHand=(card, hand)=>{
   dbg("clickedInHand, card: "+card.text());
+  assessIfPlayable(whoseTurnIsIt,card.text());
 }
 const turn=(player)=>{
   draw(player.deck,player.hand,3);
   divHandMaker(player.hand);
+
   dbg("Player: "+player.name);
   dbg("Player: "+player.deck);
   dbg("Player: "+player.hand);
+}
+const assessIfPlayable=(whoseTurn,whatCard)=>{
+  if (whoseTurn==1){ //player1
+    assessIfPlayable_search(player1,whatCard);
+  }
+  else { //player2
+    assessIfPlayable_search(player2,whatCard);
+  }
+}
+const assessIfPlayable_search=(player,whatCard)=>{
+  let arrLength=0;
+  let lastCard="";
+  for (var i = 0; i < player.inplay.length; i++) {
+    arrLength=player.inplay[i].length; //only need to check first & last cards of straights
+      dbg("arrLength: "+arrLength+" | i: "+i);
+      dbg("whatCard: "+whatCard+"| found: "+player.inplay[i]);
+    if(arrLength==0){ //an empty set
+      if(whatCard=="A"){ dbg("Playable");
+
+      }
+      else if(i==arrLength-1){ dbg("NOT playable");
+        //an empty set && this isn't A && we're on the last loop through
+      }
+    }
+    else{//straight is at least A long
+      lastCard=player.inplay[i][arrLength-1]; dbg("lastCard: "+lastCard);
+      if(notRoyal(lastCard)){
+        //if(whatCard-lastCard)
+      }
+      else{ //royal (incl. ace)
+
+      }
+    }
+    if(i==(player.inplay.length-1)){
+      dbg("NOT playable");
+    }
+  }
+  dbg("------------------");
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -83,15 +134,18 @@ const turn=(player)=>{
   let hand2=[];
   let player1={
     name:"Player 1",
+    inplay:[["A"],[],[]],
     hand:[],
     deck:[]
   };
   let player2={
     name:"Player 2",
+    inplay:[["A"],[],[]],
     hand:[],
     deck:[]
   };
   let isGameOn=true;
+  let whoseTurnIsIt=1;
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
@@ -141,6 +195,7 @@ player1.deck=rCreateDeckArr(); //dbg(deck1);
 player2.deck=rCreateDeckArr(); //dbg(deck2);
 
 // while(isGameOn){
+  whoseTurnIsIt=1;
   turn(player1);
 // }
 

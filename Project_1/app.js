@@ -12,9 +12,9 @@ const initBoard=()=>{
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
     let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
     let $game2user=$("<div>").attr("id","game2user").css(cssGame2User).appendTo($board);
-    // for (let i = 0; i < 3; i++) {
-    //   let $handHolder=$("<div>").addClass(".cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
-    // }
+    for (let i = 0; i < 3; i++) {
+      let $handHolder=$("<div>").addClass(".cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
+    }
   }
 const rCreateDeckArr=()=>{
   let arr=[];
@@ -45,6 +45,7 @@ const divHandMaker=(hand)=>{ //
 const divInPlayMaker=(whatPlayer)=>{ //
   let arrLength=0;
   let card;
+  let appendLocation="";
   for (var i = 0; i <3; i++){
     for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
       arrLength=whatPlayer.inplay[i].length;
@@ -52,7 +53,8 @@ const divInPlayMaker=(whatPlayer)=>{ //
         if (ii==0){//bottom card
           card=$("<div/>").addClass(".cards").css(cssCard);
           $(card).text(whatPlayer.inplay[i][ii]);
-          card.appendTo($("#playholder"));
+          appendLocation="#cardSlot"+i;
+          card.appendTo($(appendLocation)); dbg("57.appendLocation: "+appendLocation);
             card.on("click",(e)=>{
               clickedInPlay();
             });
@@ -60,7 +62,8 @@ const divInPlayMaker=(whatPlayer)=>{ //
         else if(ii==1 && arrLength!=1){//topcard //card displays as both top and bottom w/o check
           card=$("<div/>").addClass(".cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
-          card.appendTo($("#playholder"));
+          appendLocation="#cardSlot"+i; dbg("65.appendLocation: "+appendLocation);
+          card.appendTo($(appendLocation));
             card.on("click",(e)=>{
               clickedInPlay();
             });
@@ -178,9 +181,9 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
   };
   let player2={
     name:"Player 2",
-    inplay:[["A"],[],[]],
-    hand:[],
-    deck:[]
+    inplay:[["A","2"],[],[]], //------NOTE: this was initialized with A for testing,
+    hand:[],              //we want them to actually choose the A they get to start
+    deck:[]               //with once suits are implemented
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;
@@ -247,14 +250,14 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
   }
   let cssCardSlot={ //.cardsSlot
     // "background-color":"white",
-    "font-size":"2.5em",
-    "height":"105px",
-    "width":"65px",
+    "display":"flex",
+    "height":"110px",
+    "width":"70px",
     "border-radius":"10%",
     "border":"3px solid #A02000",
-    "text-align":"center",
     "line-height":"100px",
-    "vertical-align":"middle"
+    "vertical-align":"middle",
+    "margin":"0 70px 0 -20px"
   }
 
 //  ///////////////////////////////

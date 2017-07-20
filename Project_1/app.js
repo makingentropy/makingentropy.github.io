@@ -61,42 +61,33 @@ const turn=(player)=>{
   dbg("Player: "+player.hand);
 }
 const assessIfPlayable=(whoseTurn,whatCard)=>{
+  let playableArr=-1;
   if (whoseTurn==1){ //player1
-    assessIfPlayable_search(player1,whatCard);
+    playableArr=assessIfPlayable_search(player1,whatCard);
+    dbg("playableArr: "+playableArr);
   }
   else { //player2
-    assessIfPlayable_search(player2,whatCard);
+    playableArr=assessIfPlayable_search(player2,whatCard);
+    dbg("playableArr: "+playableArr);
   }
 }
-const assessIfPlayable_search=(player,whatCard)=>{
+const assessIfPlayable_search=(player,whatCard)=>{ //return usable array i, else -1
   let arrLength=0;
   let lastCard="";
   for (var i = 0; i < player.inplay.length; i++) {
     arrLength=player.inplay[i].length; //only need to check first & last cards of straights
-      dbg("arrLength: "+arrLength+" | i: "+i);
-      dbg("whatCard: "+whatCard+"| found: "+player.inplay[i]);
-    if(arrLength==0){ //an empty set
-      if(whatCard=="A"){ dbg("Playable");
-
-      }
-      else if(i==arrLength-1){ dbg("NOT playable");
-        //an empty set && this isn't A && we're on the last loop through
-      }
+    if(arrLength==0&&whatCard=="A") //wrote if anticipating bug, arrLength-1 if arrLength==0
+    {
+      return i;
     }
-    else{//straight is at least A long
-      lastCard=player.inplay[i][arrLength-1]; dbg("lastCard: "+lastCard);
-      if(notRoyal(lastCard)){
-        //if(whatCard-lastCard)
-      }
-      else{ //royal (incl. ace)
-
-      }
+    lastCardVal=player.inplay[i][arrLength-1]; dbg("lastCard: "+lastCard);
+    if(lastCardVal+1==cardValueArr[whatCard])
+    {
+      return i;
     }
-    if(i==(player.inplay.length-1)){
-      dbg("NOT playable");
-    }
-  }
+  }//end of for
   dbg("------------------");
+  return false;
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -129,6 +120,10 @@ const assessIfPlayable_search=(player,whatCard)=>{
     J:11, 11:"J",
     Q:12, 12:"Q",
     K:13, 13:"K"
+  }
+  const cardValueArr={ //simplifies search equations
+    A:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10,
+    J:11, Q:12, K:13
   }
   let hand1=[];
   let hand2=[];

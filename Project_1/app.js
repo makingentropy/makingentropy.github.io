@@ -1,7 +1,8 @@
 $(()=>{
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL DEBUG:
-const dbg=(s)=>{if(true){console.log(s);}} //set to false to hide debug logs
+const dbg=(s)=>{if(true){ //console.trace();
+  console.log(" | "+s);}} //set to false to hide debug logs
     // dbg("test");
 
 //  ///////////////////////////////
@@ -10,6 +11,10 @@ const initBoard=()=>{
     let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
     let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
+    let $game2user=$("<div>").attr("id","game2user").css(cssGame2User).appendTo($board);
+    // for (let i = 0; i < 3; i++) {
+    //   let $handHolder=$("<div>").addClass(".cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
+    // }
   }
 const rCreateDeckArr=()=>{
   let arr=[];
@@ -34,27 +39,47 @@ const divHandMaker=(hand)=>{ //
     card.appendTo($("#handholder"));
       card.on("click",(e)=>{
         clickedInHand(card);
-    })
+    });
   }
 }
-const playHolderMaker=(hand)=>{ //
-  for (var i = 0; i <3; )
-  for (var i = 0; i < hand.length; i++) {
-    const card=$("<div/>").addClass(".cards").css(cssCard);
-      $(card).text(hand[i]);
-    card.appendTo($("#handholder"));
-      card.on("click",(e)=>{
-        clickedInHand(card);
-    })
-  }
+const divInPlayMaker=(whatPlayer)=>{ //
+  let arrLength=0;
+  let card;
+  for (var i = 0; i <3; i++){
+    for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
+      arrLength=whatPlayer.inplay[i].length;
+      if(arrLength!==0){
+        if (ii==0){//bottom card
+          card=$("<div/>").addClass(".cards").css(cssCard);
+          $(card).text(whatPlayer.inplay[i][ii]);
+          card.appendTo($("#playholder"));
+            card.on("click",(e)=>{
+              clickedInPlay();
+            });
+        }
+        else if(ii==1 && arrLength!=1){//topcard //card displays as both top and bottom w/o check
+          card=$("<div/>").addClass(".cardsTop").css(cssCardTOP);
+          $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
+          card.appendTo($("#playholder"));
+            card.on("click",(e)=>{
+              clickedInPlay();
+            });
+        }
+      }
+    }//end inner for
+  }//end outer for
 }
 const clickedInHand=(card, hand)=>{
   dbg("clickedInHand, card: "+card.text());
   assessIfPlayable(whoseTurnIsIt,card.text());
 }
+const clickedInPlay=()=>{
+  dbg("clickedInPlay");
+}
 const turn=(player)=>{
   draw(player.deck,player.hand,3);
   divHandMaker(player.hand);
+  divInPlayMaker(player);
 
   dbg("Player: "+player.name);
   dbg("Player: "+player.deck);
@@ -65,29 +90,47 @@ const assessIfPlayable=(whoseTurn,whatCard)=>{
   if (whoseTurn==1){ //player1
     playableArr=assessIfPlayable_search(player1,whatCard);
     dbg("playableArr: "+playableArr);
+
+    // if(playableArr)
+    $("#game2user").text(playableArr);
   }
   else { //player2
     playableArr=assessIfPlayable_search(player2,whatCard);
     dbg("playableArr: "+playableArr);
+    $("#game2user").text(playableArr);
   }
 }
-const assessIfPlayable_search=(player,whatCard)=>{ //return usable array i, else -1
+const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable arrays i, else -1
   let arrLength=0;
-  let lastCard="";
+  let valLastCardOfStack="";
+  let listPlayableArrays=[];
   for (var i = 0; i < player.inplay.length; i++) {
     arrLength=player.inplay[i].length; //only need to check first & last cards of straights
+    // dbg("105.player.inplay: "+player.inplay);
+    // dbg("106.arrLength: "+arrLength);
     if(arrLength==0&&whatCard=="A") //wrote if anticipating bug, arrLength-1 if arrLength==0
     {
-      return i;
+      listPlayableArrays.push(i);
     }
-    lastCardVal=player.inplay[i][arrLength-1]; dbg("lastCard: "+lastCard);
-    if(lastCardVal+1==cardValueArr[whatCard])
+
+    valLastCardOfStack=player.inplay[i][arrLength-1];
+    dbg("113.valLastCardOfStack: "+valLastCardOfStack);
+    valLastCardOfStack=cardValueArr[valLastCardOfStack];
+    dbg("111.valLastCardOfStack: "+valLastCardOfStack);
+    if(valLastCardOfStack+1==cardValueArr[whatCard])
     {
-      return i;
+      listPlayableArrays.push(i);
     }
   }//end of for
   dbg("------------------");
-  return false;
+  if(listPlayableArrays.length>0) //we have playable arrays
+  {
+    return listPlayableArrays;
+  }
+  else{
+    listPlayableArrays.push(-1); //nothing is playable
+    return listPlayableArrays;
+  }
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -167,6 +210,18 @@ const assessIfPlayable_search=(player,whatCard)=>{ //return usable array i, else
     "widith":"80%",
     "border":"5px solid #A02000"
   }
+  let cssGame2User={ //#game2user
+    "display":"flex",
+    "color":"#87C7A5",
+    "align-items": "center",
+    "justify-content": "center",
+    "background-color":"#002200",
+    "height":"120px",
+    "widith":"400px",
+    "border-radius":"5%",
+    "border":"3px solid #87C7A5",
+    "margin":"15px 10px 0 10px"
+  }
   let cssCard={ //.cards
     "background-color":"white",
     "font-size":"2.5em",
@@ -176,7 +231,30 @@ const assessIfPlayable_search=(player,whatCard)=>{ //return usable array i, else
     "border":"3px solid #87C7A5",
     "text-align":"center",
     "line-height":"100px",
-    "vertical-align":"middle",
+    "vertical-align":"middle"
+  }
+  let cssCardTOP={ //.cardsTop
+    "background-color":"white",
+    "font-size":"2.5em",
+    "height":"100px",
+    "width":"60px",
+    "margin":"-15px 0 0 -25px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"100px",
+    "vertical-align":"middle"
+  }
+  let cssCardSlot={ //.cardsSlot
+    // "background-color":"white",
+    "font-size":"2.5em",
+    "height":"105px",
+    "width":"65px",
+    "border-radius":"10%",
+    "border":"3px solid #A02000",
+    "text-align":"center",
+    "line-height":"100px",
+    "vertical-align":"middle"
   }
 
 //  ///////////////////////////////

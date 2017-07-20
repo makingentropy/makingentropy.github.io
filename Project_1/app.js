@@ -9,9 +9,10 @@ const dbg=(s)=>{if(true){ //console.trace();
 /////////////////////////////// GLOBAL FUNCTIONS:
 const initBoard=()=>{
     let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
-    let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
-    let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
     let $game2user=$("<div>").attr("id","game2user").css(cssGame2User).appendTo($board);
+    let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
+    let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
+
     for (let i = 0; i < 3; i++) {
       let $handHolder=$("<div>").addClass(".cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
     }
@@ -46,20 +47,20 @@ const divInPlayMaker=(whatPlayer)=>{ //
   let arrLength=0;
   let card;
   let appendLocation="";
-  for (var i = 0; i <3; i++){
+  for (var i = 0; i <3; i++){ //only 3 inPlay arrays
     for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
-      arrLength=whatPlayer.inplay[i].length;
+      arrLength=whatPlayer.inplay[i].length; dbg("51.arrLength: "+arrLength);
       if(arrLength!==0){
         if (ii==0){//bottom card
           card=$("<div/>").addClass(".cards").css(cssCard);
-          $(card).text(whatPlayer.inplay[i][ii]);
+          $(card).text(whatPlayer.inplay[i][ii]); dbg("55.whatPlayer.inplay[i][ii]: "+whatPlayer.inplay[i][ii]);
           appendLocation="#cardSlot"+i;
           card.appendTo($(appendLocation)); dbg("57.appendLocation: "+appendLocation);
             card.on("click",(e)=>{
               clickedInPlay();
             });
         }
-        else if(ii==1 && arrLength!=1){//topcard //card displays as both top and bottom w/o check
+        else if(ii>0){//topcard //card displays as both top and bottom w/o check
           card=$("<div/>").addClass(".cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
           appendLocation="#cardSlot"+i; dbg("65.appendLocation: "+appendLocation);
@@ -219,11 +220,11 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
     "align-items": "center",
     "justify-content": "center",
     "background-color":"#002200",
-    "height":"120px",
+    "height":"240px",
     "widith":"400px",
     "border-radius":"5%",
     "border":"3px solid #87C7A5",
-    "margin":"15px 10px 0 10px"
+    "margin":"0px 10px 10px 10px"
   }
   let cssCard={ //.cards
     "background-color":"white",
@@ -252,7 +253,7 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
     // "background-color":"white",
     "display":"flex",
     "height":"110px",
-    "width":"70px",
+    "width":"100px",
     "border-radius":"10%",
     "border":"3px solid #A02000",
     "line-height":"100px",

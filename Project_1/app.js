@@ -11,6 +11,7 @@ const dbg=(s)=>{if(true){ //set to false to hide debug logs
 const initBoard=()=>{
     let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
     let $game2user=$("<div>").attr("id","game2user").css(cssGame2User).appendTo($board);
+    let $game2userText=$("<div>").attr("id","game2userText").css(cssGame2UserText).appendTo($game2user);
     let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
 
@@ -159,10 +160,10 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
 const whenPlayableGiveOptions=(playableArr,player,card)=>{
   //$("#game2user").text(playableArr);
   if(playableArr==-1){
-    $("#game2user").text("That card is not playable now.");
+    $("#game2userText").text("That card is not playable now.");
   }
   else{ //give options, make selectors
-    $("#game2user").text("Please click on the arrow that indicates where you'd"+
+    $("#game2userText").text("Please click on the arrow that indicates where you'd"+
       " like to place your card.");
     for (var i = 0; i < playableArr.length; i++) {
       const appendLocation="#cardSlot"+playableArr[i];
@@ -208,17 +209,22 @@ const xferTypecastHotfix=(card)=>{
 }
 const game2user_print=(player)=>{
   if(hasDrawn<2){
-    $("#game2user").text(player.name+", please make a play, draw more cards, or end turn.");
+    $("#game2userText").text(player.name+", please make a play, draw more cards, or end turn.");
   }
   else{
-    $("#game2user").text(player.name+", please make a play or end turn.");
+    $("#game2userText").text(player.name+", please make a play or end turn.");
   }
   const $endTurnBtn=$("<div>").css(cssGame2UserButton2).appendTo("#game2user").text("end turn");
     $endTurnBtn.attr("id","endTurnBtn").on("click",()=>{
-      dbg("218.End turn clicked");
-      if(whoseTurnIsIt==1){whoseTurnIsIt=2;}
-      else{whoseTurnIsIt=1;}
-      endTurnClicked=true;//nothing after this line in this () in case timer falls between commands
+      dbg("218.End turn clicked |hand.length:"+player.hand.length);
+      if(player.hand.length<8){
+        if(whoseTurnIsIt==1){whoseTurnIsIt=2;}
+        else{whoseTurnIsIt=1;}
+        endTurnClicked=true;//nothing after this line in this () in case timer falls between commands
+      }
+      else{
+        $("#game2userText").text(player.name+", Please discard until you have less than 7 cards.");
+      }
     });
   const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
   $discardBtn.attr("id","discardBtn").on("click",()=>{
@@ -315,6 +321,17 @@ const game2user_print=(player)=>{
     "widith":"400px",
     "border-radius":"5%",
     "border":"3px solid #87C7A5",
+    "margin":"0px 10px 10px 10px"
+  }
+  let cssGame2UserText={ //#game2user
+    "display":"flex",
+    "color":"#87C7A5",
+    "align-items": "center",
+    "justify-content": "center",
+    "height":"100px",
+    "widith":"400px",
+    // "border-radius":"5%",
+    // "border":"3px solid #87C7A5",
     "margin":"0px 10px 10px 10px"
   }
   let cssCard={ //.cards

@@ -169,6 +169,7 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
 }
 const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play--------");
   dbg("169.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
+  card=xferTypecastHotfix(card);
   dbg("172.typeof(card):"+typeof(card));
   let handIndex=player.hand.indexOf(card);
   let slotIndex=selectorId.split("");
@@ -186,7 +187,12 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     turn(player);
     dbg("-----/xfer*--------");
   }
-
+}
+const xferTypecastHotfix=(card)=>{
+  if(card!="K"&&card!="Q"&&card!="J"&&card!=="A"){
+    return parseInt(card);
+  }
+  else{ return card;}
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired

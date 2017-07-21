@@ -165,15 +165,16 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
   }
 }
 const xferHandCard2Play=(selectorId,player,card)=>{
-  dbg("169.args: "+selectorId+" | "+player.inplay+" | "+card);
+  dbg("169.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
   let handIndex=player.hand.indexOf(card);
   let slotIndex=selectorId.split("");
   slotIndex=slotIndex[(slotIndex.length-1)];
   slotIndex=parseInt(slotIndex); dbg("172.slotIndex: "+slotIndex);
-  if(player.hand.indexOf(card)>-1){ //ensure operation excutes once only
+  if(slotIndex>-1){ //ensure operation excutes once only
+    dbg("174."+slotIndex);
     player.inplay[slotIndex].push(card); //add card to player.inPlay
     player.hand.splice(handIndex,1);//remove card from player.hand
-    dbg("174."+player.inplay); dbg("174."+player.hand);
+    dbg("177.inplay:"+player.inplay); dbg("177.hand:"+player.hand);
   }
 
 }

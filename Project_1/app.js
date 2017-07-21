@@ -93,7 +93,7 @@ const turn=(player)=>{
   }
   divHandMaker(player.hand);
   divInPlayMaker(player);
-  game2user_print();
+  game2user_print(player);
   if(player.deck.length>0)
   {
     const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
@@ -206,15 +206,24 @@ const xferTypecastHotfix=(card)=>{
   }
   else{ return card;}
 }
-const game2user_print=()=>{
+const game2user_print=(player)=>{
   if(hasDrawn<2){
-    $("#game2user").text("Please make a play, draw more cards, or end turn.");
+    $("#game2user").text(player.name+", please make a play, draw more cards, or end turn.");
   }
   else{
-    $("#game2user").text("Please make a play or end turn.");
+    $("#game2user").text(player.name+", please make a play or end turn.");
   }
   const $endTurnBtn=$("<div>").css(cssGame2UserButton2).appendTo("#game2user").text("end turn");
+    $endTurnBtn.attr("id","endTurnBtn").on("click",()=>{
+      dbg("218.End turn clicked");
+      if(whoseTurnIsIt==1){whoseTurnIsIt=2;}
+      else{whoseTurnIsIt=1;}
+      endTurnClicked=true;//nothing after this line in this () in case timer falls between commands
+    });
   const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
+  $discardBtn.attr("id","discardBtn").on("click",()=>{
+    dbg("222.discard clicked");
+  });
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -268,6 +277,7 @@ const game2user_print=()=>{
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;
+  let endTurnClicked=false;
   let hasDrawn=0; //--------------remember to reset after end of turn, before next
 
 /////////////////////////////// CSS:
@@ -454,7 +464,27 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
 
 // while(isGameOn){
   whoseTurnIsIt=1;
-  turn(player1);
+//-------------------------Game loop vvv
+  turn(player1); //starting game with player1
+  let G=setInterval(()=>{
+    if(endTurnClicked==true)
+    {
+      if(whoseTurnIsIt==1){
+        hasDrawn=0;
+        endTurnClicked=false;
+        $("#board").remove();
+        initBoard();
+        turn(player1);
+      }
+      else{
+        hasDrawn=0;
+        endTurnClicked=false;
+        $("#board").remove();
+        initBoard();
+        turn(player2);
+      }
+    }
+  },1000);
 // }
 
 

@@ -149,14 +149,12 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
   else{ //give options, make selectors
     $("#game2user").text("Please click on the arrow that indicates where you'd"+
       " like to place your card.");
-    let appendLocation;
-    let id;
     for (var i = 0; i < playableArr.length; i++) {
-      appendLocation="#cardSlot"+playableArr[i];
-      id="selector"+playableArr[i]; dbg("155.id: "+id);
+      const appendLocation="#cardSlot"+playableArr[i];
+      const id="selector"+playableArr[i]; dbg("155.id: "+id);
       const $selector=$("<div>").addClass("selector").attr("id",id).text("▲");
       $selector.appendTo($(appendLocation));
-      $selector.on("click",(e)=>{
+      $selector.on("click",(e)=>{ dbg("159.id: "+id);
         xferHandCard2Play(id,player,card);
       });
             dbg("159.playableArr[i]: "+playableArr[i]);

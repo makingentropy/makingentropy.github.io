@@ -1,8 +1,9 @@
 $(()=>{
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL DEBUG:
-const dbg=(s)=>{if(true){ //console.trace();
-  console.log(" | "+s);}} //set to false to hide debug logs
+const dbg=(s)=>{if(true){ //set to false to hide debug logs
+  console.log(" | "+s);}
+}
     // dbg("test");
 
 //  ///////////////////////////////
@@ -152,15 +153,28 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
     let id;
     for (var i = 0; i < playableArr.length; i++) {
       appendLocation="#cardSlot"+playableArr[i];
-      id="selector"+playableArr[i];
+      id="selector"+playableArr[i]; dbg("155.id: "+id);
       const $selector=$("<div>").addClass("selector").attr("id",id).text("▲");
       $selector.appendTo($(appendLocation));
+      $selector.on("click",(e)=>{
+        xferHandCard2Play(id,player,card);
+      });
             dbg("159.playableArr[i]: "+playableArr[i]);
       if(playableArr[i]==0){$selector.css(cssSelector0);}
       else if(playableArr[i]==1){$selector.css(cssSelector1);}
       else if(playableArr[i]==2){$selector.css(cssSelector2);}
     }
   }
+}
+const xferHandCard2Play=(selectorId,player,card)=>{
+  dbg("169.args: "+selectorId+" | "+player.inplay+" | "+card);
+  let handIndex=player.hand.indexOf(card);
+  let slotIndex=selectorId.split("");
+  slotIndex=slotIndex[(slotIndex.length-1)];
+  slotIndex=parseInt(slotIndex); dbg("172.slotIndex: "+slotIndex);
+  player.inplay[slotIndex].push(card); //add card to player.inPlay
+  player.hand.splice(handIndex,1);//remove card from player.hand
+  dbg("174."+player.inplay); dbg("174."+player.hand);
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired

@@ -14,7 +14,7 @@ const initBoard=()=>{
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
 
     for (let i = 0; i < 3; i++) {
-      let $handHolder=$("<div>").addClass(".cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
+      let $handHolder=$("<div>").addClass("cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
     }
   }
 const rCreateDeckArr=()=>{
@@ -35,7 +35,7 @@ const draw=(deck,hand,totalNumCards)=>{
 }
 const divHandMaker=(hand)=>{ //
   for (var i = 0; i < hand.length; i++) {
-    const card=$("<div/>").addClass(".cards").css(cssCard);
+    const card=$("<div/>").addClass("cards").css(cssCard);
       $(card).text(hand[i]);
     card.appendTo($("#handholder"));
       card.on("click",(e)=>{
@@ -52,7 +52,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
       arrLength=whatPlayer.inplay[i].length; dbg("51.arrLength: "+arrLength); dbg("baroo: "+whatPlayer.inplay[i]);
       if(arrLength!==0){
         if (ii==0){//bottom card
-          card=$("<div/>").addClass(".cards").css(cssCard);
+          card=$("<div/>").addClass("cards").css(cssCard);
           $(card).text(whatPlayer.inplay[i][ii]); dbg("55.whatPlayer.inplay[i][ii]: "+whatPlayer.inplay[i][ii]);
           appendLocation="#cardSlot"+i;
           card.appendTo($(appendLocation)); dbg("57.appendLocation: "+appendLocation);
@@ -61,7 +61,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
             });
         }
         else if(ii>0 && arrLength>1){//topcard //card displays as both top and bottom w/o check
-          card=$("<div/>").addClass(".cardsTop").css(cssCardTOP);
+          card=$("<div/>").addClass("cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
           appendLocation="#cardSlot"+i; dbg("65.appendLocation: "+appendLocation);
           card.appendTo($(appendLocation));

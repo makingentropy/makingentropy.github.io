@@ -33,7 +33,7 @@ const draw=(deck,hand,totalNumCards)=>{
     hand.push(deck[r]);
     deck.splice(r,1); //remove card from deck
   }
-  haveDrawn++;
+  hasDrawn++;
 }
 const divHandMaker=(hand)=>{ //
   for (var i = 0; i < hand.length; i++) {
@@ -88,25 +88,25 @@ const clickedInPlay=()=>{
   dbg("clickedInPlay");
 }
 const turn=(player)=>{
-  if(haveDrawn==0){ //we only want autodraw at start of turn
+  if(hasDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
   }
   divHandMaker(player.hand);
   divInPlayMaker(player);
+  game2user_print();
   if(player.deck.length>0)
   {
     const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
     $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
-      if(haveDrawn<2){ dbg("101.drawPile");
+      if(hasDrawn<2){ dbg("101.drawPile");
         draw(player.deck,player.hand,3);
         dbg("102.player.hand:"+player.hand);
         $("#board").remove();
         initBoard();
         turn(player);
       }
-    })
+    });
   }
-
   dbg("Player: "+player.name);
   dbg("Player: "+player.deck);
   dbg("Player: "+player.hand);
@@ -206,6 +206,16 @@ const xferTypecastHotfix=(card)=>{
   }
   else{ return card;}
 }
+const game2user_print=()=>{
+  if(hasDrawn<2){
+    $("#game2user").text("Please make a play, draw more cards, or end turn.");
+  }
+  else{
+    $("#game2user").text("Please make a play or end turn.");
+  }
+  const $endTurnBtn=$("<div>").css(cssGame2UserButton2).appendTo("#game2user").text("end turn");
+  const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
+}
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
         if(n>1&&n<11){return true;}
@@ -258,7 +268,7 @@ const xferTypecastHotfix=(card)=>{
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;
-  let haveDrawn=0; //--------------remember to reset after end of turn, before next
+  let hasDrawn=0; //--------------remember to reset after end of turn, before next
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
@@ -396,6 +406,38 @@ const xferTypecastHotfix=(card)=>{
     "border":"3px solid #FFFFFF",
     "text-align":"center",
     "line-height":"25px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
+  let cssGame2UserButton1={
+    "background-color":"#002200",
+    "position":"absolute",
+    "color":"#87C7A5",
+    "top":"180px",
+    "left":"160px",
+    "font-size":"1em",
+    "height":"60px",
+    "width":"100px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"60px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
+  let cssGame2UserButton2={
+    "background-color":"#002200",
+    "position":"absolute",
+    "color":"#87C7A5",
+    "top":"180px",
+    "left":"300px",
+    "font-size":"1em",
+    "height":"60px",
+    "width":"100px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"60px",
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }

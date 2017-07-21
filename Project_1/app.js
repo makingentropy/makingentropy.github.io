@@ -88,7 +88,7 @@ const clickedInPlay=()=>{
   dbg("clickedInPlay");
 }
 const turn=(player)=>{
-  if(haveDrawn==0){
+  if(haveDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
   }
   divHandMaker(player.hand);
@@ -97,8 +97,12 @@ const turn=(player)=>{
   {
     const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
     $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
-      if(haveDrawn<2){
-        dbg("101.drawPile");
+      if(haveDrawn<2){ dbg("101.drawPile");
+        draw(player.deck,player.hand,3);
+        dbg("102.player.hand:"+player.hand);
+        $("#board").remove();
+        initBoard();
+        turn(player);
       }
     })
   }

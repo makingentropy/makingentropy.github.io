@@ -123,9 +123,9 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
     }
 
     valLastCardOfStack=player.inplay[i][arrLength-1];
-    dbg("113.valLastCardOfStack: "+valLastCardOfStack);
+    //dbg("113.valLastCardOfStack: "+valLastCardOfStack);
     valLastCardOfStack=cardValueArr[valLastCardOfStack];
-    dbg("111.valLastCardOfStack: "+valLastCardOfStack);
+    //dbg("111.valLastCardOfStack: "+valLastCardOfStack);
     if(valLastCardOfStack+1==cardValueArr[whatCard])
     {
       listPlayableArrays.push(i);
@@ -164,17 +164,18 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
     }
   }
 }
-const xferHandCard2Play=(selectorId,player,card)=>{
+const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play--------");
   dbg("169.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
   let handIndex=player.hand.indexOf(card);
   let slotIndex=selectorId.split("");
   slotIndex=slotIndex[(slotIndex.length-1)];
   slotIndex=parseInt(slotIndex); dbg("172.slotIndex: "+slotIndex);
   if(slotIndex>-1){ //ensure operation excutes once only
+      dbg("174.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
     dbg("174."+slotIndex);
     player.inplay[slotIndex].push(card); //add card to player.inPlay
     player.hand.splice(handIndex,1);//remove card from player.hand
-    dbg("177.inplay:"+player.inplay); dbg("177.hand:"+player.hand);
+    dbg("177.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("177.hand:"+player.hand);
   }
 
 }

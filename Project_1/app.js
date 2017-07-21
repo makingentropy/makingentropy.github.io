@@ -172,9 +172,12 @@ const xferHandCard2Play=(selectorId,player,card)=>{
   let slotIndex=selectorId.split("");
   slotIndex=slotIndex[(slotIndex.length-1)];
   slotIndex=parseInt(slotIndex); dbg("172.slotIndex: "+slotIndex);
-  player.inplay[slotIndex].push(card); //add card to player.inPlay
-  player.hand.splice(handIndex,1);//remove card from player.hand
-  dbg("174."+player.inplay); dbg("174."+player.hand);
+  if(player.hand.indexOf(card)>-1){ //ensure operation excutes once only
+    player.inplay[slotIndex].push(card); //add card to player.inPlay
+    player.hand.splice(handIndex,1);//remove card from player.hand
+    dbg("174."+player.inplay); dbg("174."+player.hand);
+  }
+
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired

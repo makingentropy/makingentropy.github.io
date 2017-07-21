@@ -78,16 +78,9 @@ const divInPlayMaker=(whatPlayer)=>{ //
 const clickedInHand=(card)=>{
   if(isDiscarding==true){ //remove cards clicked
     const dbgTxt=card.text();
-
+    console.log(card.text());
     if(whoseTurnIsIt==1){ //player 1
-      dbg("83.card:"+card.text()+" |typeof(card): "+dbgTxt+" "+typeof(dbgTxt));
-      dbg("84.player1.hand:"+player1.hand);
-      let indx=player1.hand.indexOf(card.text);
-        let type=typeof(card.text);
-        dbg("86.indexOf "+card.text+" as "+type+": "+indx);
-      indx=player1.hand.indexOf(typecastHotfix(card));
-        type=typecastHotfix(card.text);
-        dbg("88.indexOf "+card.text+" as "+type+": "+indx);
+
     }
     else{ //player 2
 
@@ -95,7 +88,6 @@ const clickedInHand=(card)=>{
   }
   else{
     removeSelectors();
-    //dbg("80.clickedInHand, card: "+card.text());
     assessIfPlayable(whoseTurnIsIt,card.text());
   }
 }
@@ -133,12 +125,12 @@ const assessIfPlayable=(whoseTurn,whatCard)=>{
   let playableArr=-1;
   if (whoseTurn==1){ //player1
     playableArr=assessIfPlayable_search(player1,whatCard);
-    dbg("playableArr: "+playableArr);
+    dbg("128.playableArr: "+playableArr);
     whenPlayableGiveOptions(playableArr,player1,whatCard);
   }
   else { //player2
     playableArr=assessIfPlayable_search(player2,whatCard);
-    dbg("playableArr: "+playableArr);
+    dbg("133.playableArr: "+playableArr);
     whenPlayableGiveOptions(playableArr,player2,whatCard);
   }
 }

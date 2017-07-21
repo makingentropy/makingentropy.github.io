@@ -169,6 +169,7 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
 }
 const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play--------");
   dbg("169.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
+  dbg("172.typeof(card):"+typeof(card));
   let handIndex=player.hand.indexOf(card);
   let slotIndex=selectorId.split("");
   slotIndex=slotIndex[(slotIndex.length-1)];
@@ -183,6 +184,7 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     $("#board").remove();
     initBoard();
     turn(player);
+    dbg("-----/xfer*--------");
   }
 
 }

@@ -33,6 +33,7 @@ const draw=(deck,hand,totalNumCards)=>{
     hand.push(deck[r]);
     deck.splice(r,1); //remove card from deck
   }
+  haveDrawn++;
 }
 const divHandMaker=(hand)=>{ //
   for (var i = 0; i < hand.length; i++) {
@@ -50,13 +51,13 @@ const divInPlayMaker=(whatPlayer)=>{ //
   let appendLocation="";
   for (var i = 0; i <3; i++){ //only 3 inPlay arrays
     for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
-      arrLength=whatPlayer.inplay[i].length; dbg("51.arrLength: "+arrLength); dbg("baroo: "+whatPlayer.inplay[i]);
+      arrLength=whatPlayer.inplay[i].length; //dbg("51.arrLength: "+arrLength); dbg("baroo: "+whatPlayer.inplay[i]);
       if(arrLength!==0){
         if (ii==0){//bottom card
           card=$("<div/>").addClass("cards").css(cssCard);
-          $(card).text(whatPlayer.inplay[i][ii]); dbg("55.whatPlayer.inplay[i][ii]: "+whatPlayer.inplay[i][ii]);
+          $(card).text(whatPlayer.inplay[i][ii]); //dbg("55.whatPlayer.inplay[i][ii]: "+whatPlayer.inplay[i][ii]);
           appendLocation="#cardSlot"+i;
-          card.appendTo($(appendLocation)); dbg("57.appendLocation: "+appendLocation);
+          card.appendTo($(appendLocation)); //dbg("57.appendLocation: "+appendLocation);
             card.on("click",(e)=>{
               clickedInPlay();
             });
@@ -64,7 +65,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
         else if(ii>0 && arrLength>1){//topcard //card displays as both top and bottom w/o check
           card=$("<div/>").addClass("cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
-          appendLocation="#cardSlot"+i; dbg("65.appendLocation: "+appendLocation);
+          appendLocation="#cardSlot"+i; //dbg("65.appendLocation: "+appendLocation);
           card.appendTo($(appendLocation));
             card.on("click",(e)=>{
               clickedInPlay();
@@ -76,7 +77,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
 }
 const clickedInHand=(card, hand)=>{
   removeSelectors();
-  dbg("clickedInHand, card: "+card.text());
+  //dbg("80.clickedInHand, card: "+card.text());
   assessIfPlayable(whoseTurnIsIt,card.text());
 
 }
@@ -87,7 +88,9 @@ const clickedInPlay=()=>{
   dbg("clickedInPlay");
 }
 const turn=(player)=>{
-  draw(player.deck,player.hand,3);
+  if(haveDrawn==0){
+    draw(player.deck,player.hand,3);
+  }
   divHandMaker(player.hand);
   divInPlayMaker(player);
 
@@ -151,13 +154,13 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
       " like to place your card.");
     for (var i = 0; i < playableArr.length; i++) {
       const appendLocation="#cardSlot"+playableArr[i];
-      const id="selector"+playableArr[i]; dbg("155.id: "+id);
+      const id="selector"+playableArr[i]; //dbg("155.id: "+id);
       const $selector=$("<div>").addClass("selector").attr("id",id).text("▲");
       $selector.appendTo($(appendLocation));
-      $selector.on("click",(e)=>{ dbg("159.id: "+id);
+      $selector.on("click",(e)=>{ //dbg("159.id: "+id);
         xferHandCard2Play(id,player,card);
       });
-            dbg("159.playableArr[i]: "+playableArr[i]);
+            //dbg("163.playableArr[i]: "+playableArr[i]);
       if(playableArr[i]==0){$selector.css(cssSelector0);}
       else if(playableArr[i]==1){$selector.css(cssSelector1);}
       else if(playableArr[i]==2){$selector.css(cssSelector2);}
@@ -171,11 +174,11 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
   slotIndex=slotIndex[(slotIndex.length-1)];
   slotIndex=parseInt(slotIndex); dbg("172.slotIndex: "+slotIndex);
   if(slotIndex>-1){ //ensure operation excutes once only
-      dbg("174.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
-    dbg("174."+slotIndex);
+      dbg("177.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
+    dbg("178.slotIndex:"+slotIndex+" |handIndex:"+handIndex);
     player.inplay[slotIndex].push(card); //add card to player.inPlay
     player.hand.splice(handIndex,1);//remove card from player.hand
-    dbg("177.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("177.hand:"+player.hand);
+    dbg("183.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("183.hand:"+player.hand);
 
     $("#board").remove();
     initBoard();
@@ -235,6 +238,7 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;
+  let haveDrawn=0; //--------------remember to reset after end of turn, before next
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board

@@ -93,6 +93,15 @@ const turn=(player)=>{
   }
   divHandMaker(player.hand);
   divInPlayMaker(player);
+  if(player.deck.length>0)
+  {
+    const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
+    $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
+      if(haveDrawn<2){
+        dbg("101.drawPile");
+      }
+    })
+  }
 
   dbg("Player: "+player.name);
   dbg("Player: "+player.deck);
@@ -109,7 +118,6 @@ const assessIfPlayable=(whoseTurn,whatCard)=>{
     playableArr=assessIfPlayable_search(player2,whatCard);
     dbg("playableArr: "+playableArr);
     whenPlayableGiveOptions(playableArr,player2,whatCard);
-
   }
 }
 const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable arrays i, else -1
@@ -370,6 +378,22 @@ const xferTypecastHotfix=(card)=>{
     "vertical-align":"middle",
     "margin":"20 0 0 0",
     "z-index":"2"
+  }
+  let cssDrawPile={  //$drawPile defined in turn
+    "background-color":"#87C7A5",
+    "position":"absolute",
+    "color":"#FFFFFF",
+    "top":"304px",
+    "left":"470px",
+    "font-size":"0.5em",
+    "height":"100px",
+    "width":"60px",
+    "border-radius":"10%",
+    "border":"3px solid #FFFFFF",
+    "text-align":"center",
+    "line-height":"25px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
   }
 
 //  ///////////////////////////////

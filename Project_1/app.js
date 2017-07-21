@@ -48,14 +48,13 @@ const divHandMaker=(hand)=>{ //
 }
 const divInPlayMaker=(whatPlayer)=>{ //
   let arrLength=0;
-  let card;
   let appendLocation="";
   for (var i = 0; i <3; i++){ //only 3 inPlay arrays
     for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
       arrLength=whatPlayer.inplay[i].length; //dbg("51.arrLength: "+arrLength); dbg("baroo: "+whatPlayer.inplay[i]);
       if(arrLength!==0){
         if (ii==0){//bottom card
-          card=$("<div/>").addClass("cards").css(cssCard);
+          const card=$("<div/>").addClass("cards").css(cssCard);
           $(card).text(whatPlayer.inplay[i][ii]); //dbg("55.whatPlayer.inplay[i][ii]: "+whatPlayer.inplay[i][ii]);
           appendLocation="#cardSlot"+i;
           card.appendTo($(appendLocation)); //dbg("57.appendLocation: "+appendLocation);
@@ -64,23 +63,41 @@ const divInPlayMaker=(whatPlayer)=>{ //
             });
         }
         else if(ii>0 && arrLength>1){//topcard //card displays as both top and bottom w/o check
-          card=$("<div/>").addClass("cardsTop").css(cssCardTOP);
+          const card=$("<div/>").addClass("cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
           appendLocation="#cardSlot"+i; //dbg("65.appendLocation: "+appendLocation);
           card.appendTo($(appendLocation));
             card.on("click",(e)=>{
-              clickedInPlay();
+              clickedInPlay(card);
             });
         }
       }
     }//end inner for
   }//end outer for
 }
-const clickedInHand=(card, hand)=>{
-  removeSelectors();
-  //dbg("80.clickedInHand, card: "+card.text());
-  assessIfPlayable(whoseTurnIsIt,card.text());
+const clickedInHand=(card)=>{
+  if(isDiscarding==true){ //remove cards clicked
+    const dbgTxt=card.text();
 
+    if(whoseTurnIsIt==1){ //player 1
+      dbg("83.card:"+card.text()+" |typeof(card): "+dbgTxt+" "+typeof(dbgTxt));
+      dbg("84.player1.hand:"+player1.hand);
+      let indx=player1.hand.indexOf(card.text);
+        let type=typeof(card.text);
+        dbg("86.indexOf "+card.text+" as "+type+": "+indx);
+      indx=player1.hand.indexOf(typecastHotfix(card));
+        type=typecastHotfix(card.text);
+        dbg("88.indexOf "+card.text+" as "+type+": "+indx);
+    }
+    else{ //player 2
+
+    }
+  }
+  else{
+    removeSelectors();
+    //dbg("80.clickedInHand, card: "+card.text());
+    assessIfPlayable(whoseTurnIsIt,card.text());
+  }
 }
 const removeSelectors=()=>{
   $('.selector').remove(); dbg("--------in removeSelectors");
@@ -182,7 +199,7 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
 }
 const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play--------");
   dbg("169.selector: "+selectorId+" |inplay: "+player.inplay+" |card: "+card);
-  card=xferTypecastHotfix(card);
+  card=typecastHotfix(card);
   dbg("172.typeof(card):"+typeof(card));
   let handIndex=player.hand.indexOf(card);
   let slotIndex=selectorId.split("");
@@ -201,7 +218,7 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     dbg("-----/xfer*--------");
   }
 }
-const xferTypecastHotfix=(card)=>{
+const typecastHotfix=(card)=>{
   if(card!="K"&&card!="Q"&&card!="J"&&card!=="A"){
     return parseInt(card);
   }
@@ -228,6 +245,8 @@ const game2user_print=(player)=>{
     });
   const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
   $discardBtn.attr("id","discardBtn").on("click",()=>{
+    $("#game2userText").text("Carefully click each card you wish to discard. They are gone forever.");
+    isDiscarding=true;
     dbg("222.discard clicked");
   });
 }
@@ -285,6 +304,7 @@ const game2user_print=(player)=>{
   let whoseTurnIsIt=1;
   let endTurnClicked=false;
   let hasDrawn=0; //--------------remember to reset after end of turn, before next
+  isDiscarding=false;
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
@@ -487,6 +507,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
     if(endTurnClicked==true)
     {
       if(whoseTurnIsIt==1){
+        isDiscarding=false;
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();
@@ -494,6 +515,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
         turn(player1);
       }
       else{
+        isDiscarding=false;
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();

@@ -94,14 +94,13 @@ const assessIfPlayable=(whoseTurn,whatCard)=>{
   if (whoseTurn==1){ //player1
     playableArr=assessIfPlayable_search(player1,whatCard);
     dbg("playableArr: "+playableArr);
-
-    // if(playableArr)
-    $("#game2user").text(playableArr);
+    whenPlayableGiveOptions(playableArr,player1,whatCard);
   }
   else { //player2
     playableArr=assessIfPlayable_search(player2,whatCard);
     dbg("playableArr: "+playableArr);
-    $("#game2user").text(playableArr);
+    whenPlayableGiveOptions(playableArr,player2,whatCard);
+
   }
 }
 const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable arrays i, else -1
@@ -134,6 +133,28 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
   else{
     listPlayableArrays.push(-1); //nothing is playable
     return listPlayableArrays;
+  }
+}
+const whenPlayableGiveOptions=(playableArr,player,card)=>{
+  //$("#game2user").text(playableArr);
+  if(playableArr==-1){
+    $("#game2user").text("That card is not playable now.");
+  }
+  else{ //give options, make selectors
+    $("#game2user").text("Please click on the arrow that indicates where you'd"+
+      " like to place your card.");
+    let appendLocation;
+    let id;
+    for (var i = 0; i < playableArr.length; i++) {
+      appendLocation="#cardSlot"+playableArr[i];
+      id="selector"+playableArr[i];
+      const $selector=$("<div>").addClass(".selector").attr("id",id).text("▲");
+      $selector.appendTo($(appendLocation));
+            dbg("159.playableArr[i]: "+playableArr[i]);
+      if(playableArr[i]==0){$selector.css(cssSelector0);}
+      else if(playableArr[i]==1){$selector.css(cssSelector1);}
+      else if(playableArr[i]==2){$selector.css(cssSelector2);}
+    }
   }
 }
 /////////////////////////////// HELPER FUNC:
@@ -259,6 +280,57 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
     "line-height":"100px",
     "vertical-align":"middle",
     "margin":"0 70px 0 -20px"
+  }
+  let cssSelector0={
+    "background-color":"#002200",
+    "position":"absolute",
+    "top":"384px",
+    "left":"60px",
+    "color":"#FFDF00",
+    "font-size":"1.5em",
+    "height":"20px",
+    "width":"40px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"20px",
+    "vertical-align":"middle",
+    "margin":"20 0 0 0",
+    "z-index":"2"
+  }
+  let cssSelector1={
+    "background-color":"#002200",
+    "position":"absolute",
+    "top":"384px",
+    "left":"215px",
+    "color":"#FFDF00",
+    "font-size":"1.5em",
+    "height":"20px",
+    "width":"40px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"20px",
+    "vertical-align":"middle",
+    "margin":"20 0 0 0",
+    "z-index":"2"
+  }
+  let cssSelector2={
+    "background-color":"#002200",
+    "position":"absolute",
+    "top":"384px",
+    "left":"370px",
+    "color":"#FFDF00",
+    "font-size":"1.5em",
+    "height":"20px",
+    "width":"40px",
+    "border-radius":"10%",
+    "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"20px",
+    "vertical-align":"middle",
+    "margin":"20 0 0 0",
+    "z-index":"2"
   }
 
 //  ///////////////////////////////

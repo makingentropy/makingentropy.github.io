@@ -176,6 +176,10 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     player.inplay[slotIndex].push(card); //add card to player.inPlay
     player.hand.splice(handIndex,1);//remove card from player.hand
     dbg("177.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("177.hand:"+player.hand);
+
+    $("#board").remove();
+    initBoard();
+    turn(player);
   }
 
 }

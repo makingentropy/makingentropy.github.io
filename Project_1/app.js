@@ -74,8 +74,13 @@ const divInPlayMaker=(whatPlayer)=>{ //
   }//end outer for
 }
 const clickedInHand=(card, hand)=>{
+  removeSelectors();
   dbg("clickedInHand, card: "+card.text());
   assessIfPlayable(whoseTurnIsIt,card.text());
+
+}
+const removeSelectors=()=>{
+  $('.selector').remove(); dbg("--------in removeSelectors");
 }
 const clickedInPlay=()=>{
   dbg("clickedInPlay");
@@ -148,7 +153,7 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
     for (var i = 0; i < playableArr.length; i++) {
       appendLocation="#cardSlot"+playableArr[i];
       id="selector"+playableArr[i];
-      const $selector=$("<div>").addClass(".selector").attr("id",id).text("▲");
+      const $selector=$("<div>").addClass("selector").attr("id",id).text("▲");
       $selector.appendTo($(appendLocation));
             dbg("159.playableArr[i]: "+playableArr[i]);
       if(playableArr[i]==0){$selector.css(cssSelector0);}
@@ -256,7 +261,8 @@ const whenPlayableGiveOptions=(playableArr,player,card)=>{
     "border":"3px solid #87C7A5",
     "text-align":"center",
     "line-height":"100px",
-    "vertical-align":"middle"
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
   }
   let cssCardTOP={ //.cardsTop
     "background-color":"white",

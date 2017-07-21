@@ -49,7 +49,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
   let appendLocation="";
   for (var i = 0; i <3; i++){ //only 3 inPlay arrays
     for (var ii = 0; ii < 2; ii++) { //only display first and last (top) card
-      arrLength=whatPlayer.inplay[i].length; dbg("51.arrLength: "+arrLength);
+      arrLength=whatPlayer.inplay[i].length; dbg("51.arrLength: "+arrLength); dbg("baroo: "+whatPlayer.inplay[i]);
       if(arrLength!==0){
         if (ii==0){//bottom card
           card=$("<div/>").addClass(".cards").css(cssCard);
@@ -60,7 +60,7 @@ const divInPlayMaker=(whatPlayer)=>{ //
               clickedInPlay();
             });
         }
-        else if(ii>0){//topcard //card displays as both top and bottom w/o check
+        else if(ii>0 && arrLength>1){//topcard //card displays as both top and bottom w/o check
           card=$("<div/>").addClass(".cardsTop").css(cssCardTOP);
           $(card).text(whatPlayer.inplay[i][arrLength-1]); //last card
           appendLocation="#cardSlot"+i; dbg("65.appendLocation: "+appendLocation);
@@ -182,9 +182,9 @@ const assessIfPlayable_search=(player,whatCard)=>{ //returns list of playable ar
   };
   let player2={
     name:"Player 2",
-    inplay:[["A","2"],[],[]], //------NOTE: this was initialized with A for testing,
-    hand:[],              //we want them to actually choose the A they get to start
-    deck:[]               //with once suits are implemented
+    inplay:[["A"],[],[]], //------NOTE: this, and player1, was initialized with
+    hand:[],              //A for testing, we want them to actually choose the
+    deck:[]               //A they start with once suits are implemented
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;

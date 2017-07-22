@@ -83,14 +83,18 @@ const clickedInHand=(card)=>{
     console.log("84."+properDataText+" "+typeof(properDataText));
     if(whoseTurnIsIt==1){ //player 1
       const indx=player1.hand.indexOf(properDataText);
-      player1.hand.splice(indx,1); dbg("84."+player1.hand);
+      player1.discarded.push(player1.hand[indx]); //---------added to discard pile
+          dbg("discarded:"+player1.discarded);
+      player1.hand.splice(indx,1); dbg("84."+player1.hand);//removed from hand
       $("#board").remove();
       initBoard();
       turn(player1);
     }
     else{ //player 2
       const indx=player2.hand.indexOf(properDataText);
-      player2.hand.splice(indx,1); dbg("84."+player2.hand);
+      player2.discarded.push(player2.hand[indx]); //---------added to discard pile
+          dbg("discarded:"+player2.discarded);
+      player2.hand.splice(indx,1); dbg("84."+player2.hand);//removed from hand
       $("#board").remove();
       initBoard();
       turn(player2);
@@ -301,15 +305,15 @@ const game2user_print=(player)=>{
     name:"Player 1",
     inplay:[["A"],[],[]],
     hand:[],
-    deck:[]
-
+    deck:[],
+    discarded:[]
   };
   let player2={
     name:"Player 2",
     inplay:[["A"],[],[]], //------NOTE: this, and player1, was initialized with
     hand:[],              //A for testing, we want them to actually choose the
-    deck:[]               //A they start with once suits are implemented
-
+    deck:[],               //A they start with once suits are implemented
+    discarded:[]
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;

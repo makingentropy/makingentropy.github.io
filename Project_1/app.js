@@ -21,9 +21,11 @@ const initBoard=()=>{
   }
 const rCreateDeckArr=()=>{
   let arr=[];
-  for(i=1;i<=13;i++){
-    if(notRoyal(i)){arr.push(i);}
-    else{arr.push(royals[i]);}
+  for (let ii=1;ii<4;ii++){
+    for(let i=1;i<=13;i++){
+      if(notRoyal(i)){arr.push(i);}
+      else{arr.push(royals[i]);}
+    }
   }
   return arr;
 }
@@ -247,7 +249,7 @@ const game2user_print=(player)=>{
         endTurnClicked=true;//nothing after this line in this () in case timer falls between commands
       }
       else{
-        $("#game2userText").text(player.name+", Please discard until you have less than 7 cards.");
+        $("#game2userText").text(player.name+", Please discard until you have less than 8 cards.");
       }
     });
   const $discardBtn=$("<div>").css(cssGame2UserDiscard).appendTo("#game2user").text("discard");
@@ -294,19 +296,20 @@ const game2user_print=(player)=>{
     A:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10,
     J:11, Q:12, K:13
   }
-  let hand1=[];
-  let hand2=[];
+  const suits=["♠","♥","♦","♣"];
   let player1={
     name:"Player 1",
     inplay:[["A"],[],[]],
     hand:[],
     deck:[]
+
   };
   let player2={
     name:"Player 2",
     inplay:[["A"],[],[]], //------NOTE: this, and player1, was initialized with
     hand:[],              //A for testing, we want them to actually choose the
     deck:[]               //A they start with once suits are implemented
+
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;

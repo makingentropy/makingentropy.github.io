@@ -113,6 +113,12 @@ const turn=(player)=>{
   divHandMaker(player.hand);
   divInPlayMaker(player);
   game2user_print(player);
+  if (whoseTurnIsIt==2){
+    $("#game2user").css(cssGame2UserPlayer2);
+    $("#game2userText").css(cssGame2UserTextPlayer2);
+    $("#endTurnBtn").css(cssGame2UserEndTurnP2);
+    $("#discardBtn").css(cssGame2UserDiscardP2);
+  }
   if(player.deck.length>0)
   {
     const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
@@ -232,7 +238,7 @@ const game2user_print=(player)=>{
   else{
     $("#game2userText").text(player.name+", please make a play or end turn.");
   }
-  const $endTurnBtn=$("<div>").css(cssGame2UserButton2).appendTo("#game2user").text("end turn");
+  const $endTurnBtn=$("<div>").css(cssGame2UserEndTurn).appendTo("#game2user").text("end turn");
     $endTurnBtn.attr("id","endTurnBtn").on("click",()=>{
       dbg("218.End turn clicked |hand.length:"+player.hand.length);
       if(player.hand.length<8){
@@ -244,8 +250,8 @@ const game2user_print=(player)=>{
         $("#game2userText").text(player.name+", Please discard until you have less than 7 cards.");
       }
     });
-  const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
-  $discardBtn.attr("id","discardBtn").on("click",()=>{
+  const $discardBtn=$("<div>").css(cssGame2UserDiscard).appendTo("#game2user").text("discard");
+  $discardBtn.attr("id","discardBtn").on("click",(e)=>{
     $("#game2userText").text("Carefully click each card you wish to discard. They are gone forever.");
     $("#discardBtn").css(cssDiscardActive);
     isDiscarding=true;
@@ -345,9 +351,32 @@ const game2user_print=(player)=>{
     "border":"3px solid #87C7A5",
     "margin":"0px 10px 10px 10px"
   }
+  let cssGame2UserPlayer2={ //#game2user
+    "display":"flex",
+    "color":"#FFA500",
+    "align-items": "center",
+    "justify-content": "center",
+    "background-color":"#002200",
+    "height":"240px",
+    "widith":"400px",
+    "border-radius":"5%",
+    "border":"3px solid #FFA500",
+    "margin":"0px 10px 10px 10px"
+  }
   let cssGame2UserText={ //#game2user
     "display":"flex",
     "color":"#87C7A5",
+    "align-items": "center",
+    "justify-content": "center",
+    "height":"100px",
+    "widith":"400px",
+    // "border-radius":"5%",
+    // "border":"3px solid #87C7A5",
+    "margin":"0px 10px 10px 10px"
+  }
+  let cssGame2UserTextPlayer2={ //#game2user
+    "display":"flex",
+    "color":"#FFA500",
     "align-items": "center",
     "justify-content": "center",
     "height":"100px",
@@ -458,7 +487,7 @@ const game2user_print=(player)=>{
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }
-  let cssGame2UserButton1={
+  let cssGame2UserDiscard={
     "background-color":"#002200",
     "position":"absolute",
     "color":"#87C7A5",
@@ -474,7 +503,7 @@ const game2user_print=(player)=>{
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }
-  let cssGame2UserButton2={
+  let cssGame2UserEndTurn={
     "background-color":"#002200",
     "position":"absolute",
     "color":"#87C7A5",
@@ -485,6 +514,38 @@ const game2user_print=(player)=>{
     "width":"100px",
     "border-radius":"10%",
     "border":"3px solid #87C7A5",
+    "text-align":"center",
+    "line-height":"60px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
+  let cssGame2UserDiscardP2={
+    "background-color":"#002200",
+    "position":"absolute",
+    "color":"#FFA500",
+    "top":"180px",
+    "left":"160px",
+    "font-size":"1em",
+    "height":"60px",
+    "width":"100px",
+    "border-radius":"10%",
+    "border":"3px solid #FFA500",
+    "text-align":"center",
+    "line-height":"60px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
+  let cssGame2UserEndTurnP2={
+    "background-color":"#002200",
+    "position":"absolute",
+    "color":"#FFA500",
+    "top":"180px",
+    "left":"300px",
+    "font-size":"1em",
+    "height":"60px",
+    "width":"100px",
+    "border-radius":"10%",
+    "border":"3px solid #FFA500",
     "text-align":"center",
     "line-height":"60px",
     "vertical-align":"middle",
@@ -524,16 +585,14 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
   let G=setInterval(()=>{
     if(endTurnClicked==true)
     {
-      if(whoseTurnIsIt==1){
-
+      if(whoseTurnIsIt==1){ //PLAYER
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();
         initBoard();
         turn(player1);
       }
-      else{
-
+      else{ //PLAYER 2
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();

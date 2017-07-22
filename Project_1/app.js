@@ -17,7 +17,12 @@ const initBoard=(player)=>{
     let $rounds=$("<div>").attr("id","rounds").css(cssRounds).text("round: "+round).appendTo($board);
     let $points=$("<div>").attr("id","points").text("points: "+player.points).css(cssPoints).appendTo($board);
     let $discards=$("<div>").attr("id","discards").text("discard count: "+player.discarded.length).css(cssDiscardCounter).appendTo($board);
-
+    if(player.discarded.length>0){
+      const $shopPile=$("<div>").attr("id","shopPile").css(cssShopPile).appendTo($("#board"));
+      $shopPile.append("S<br>H<br>O<br>P").on("click",()=>{
+        dbg(" ♦ shop clicked ♦ ");
+      });
+    }
     for (let i = 0; i < 3; i++) {
       let $handHolder=$("<div>").addClass("cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
     }
@@ -510,6 +515,22 @@ const game2user_print=(player)=>{
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }
+  let cssShopPile={  //$shopPile defined in turn
+    "background-color":"#222222",
+    "position":"absolute",
+    "color":"#FFDF00",
+    "top":"180px",
+    "left":"470px",
+    "font-size":"0.5em",
+    "height":"100px",
+    "width":"60px",
+    "border-radius":"10%",
+    "border":"3px solid #FFDF00",
+    "text-align":"center",
+    "line-height":"25px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
   let cssGame2UserDiscard={
     "background-color":"#002200",
     "position":"absolute",
@@ -640,7 +661,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
 // while(isGameOn){
   whoseTurnIsIt=1;
 //-------------------------Game loop vvv
-  dbg("////♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣////");
+  dbg("////♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠s t a r t♥ ♦ ♣ ♠ ♥ ♦ ♣////");
   turn(player1); //starting game with player1
   let G=setInterval(()=>{
     if(endTurnClicked==true)

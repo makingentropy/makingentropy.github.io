@@ -325,7 +325,7 @@ const game2user_print=(player)=>{
   let whoseTurnIsIt=1;
   let endTurnClicked=false;
   let hasDrawn=0; //--------------remember to reset after end of turn, before next
-  isDiscarding=false;
+  let isDiscarding=false;
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board

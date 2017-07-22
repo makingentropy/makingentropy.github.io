@@ -299,6 +299,44 @@ const buyCardBack=(player)=>{
     dbg("player hasn't any discards")
   }
 }
+const isWinning=()=>{
+  const player1won=rTrueIfWon(player1);
+  const player2won=rTrueIfWon(player2);
+  if(player1won&&player2won){
+    const p1MinusP2=player1.points-player2.points;
+    if(p1MinusP2>0){
+      alert("Player 1 narrowly won by "+p1MinusP2+" points!");
+    }
+    else if(p1MinusP2<0){
+      alert("Player 1 narrowly won by "+(p1MinusP2*(-1))+" points!");
+    }
+    else{
+      alert("A perfect tie!");
+    }
+  }
+  else if(player1won){
+    alert("Player 1 won!");
+  }
+  else if(player1won){
+    alert("Player 2 won!");
+  }
+  else{}//nothing
+}
+const rTrueIfWon=(player)=>{
+  let numCompletions=0;
+  for (let i = 0; i < player.inplay.length; i++) {
+    if(player.inplay[i].length==13){
+      numCompletions++;
+    }
+  }
+  dbg("numCompletions: "+numCompletions);
+  if(numCompletions==3){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
         if(n>1&&n<11){return true;}
@@ -686,6 +724,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
   let G=setInterval(()=>{
     if(endTurnClicked==true)
     {
+      isWinning();//checks if someone won
       dbg("♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♠ ♥ ♦ ♣ ♠");
       if(whoseTurnIsIt==1){ //PLAYER 1
         round++;

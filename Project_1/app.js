@@ -8,12 +8,15 @@ const dbg=(s)=>{if(true){ //set to false to hide debug logs
 
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL FUNCTIONS:
-const initBoard=()=>{
+const initBoard=(player)=>{
     let $board=$("<div>").attr("id","board").css(cssBoard).appendTo("body");
     let $game2user=$("<div>").attr("id","game2user").css(cssGame2User).appendTo($board);
     let $game2userText=$("<div>").attr("id","game2userText").css(cssGame2UserText).appendTo($game2user);
     let $playholder=$("<div>").attr("id","playholder").css(cssPlayHolder).appendTo($board);
     let $handHolder=$("<div>").attr("id","handholder").css(cssHandHolder).appendTo($board);
+    let $rounds=$("<div>").attr("id","rounds").css(cssRounds).text("round: "+round).appendTo($board);
+    let $points=$("<div>").attr("id","points").text("points: "+player.points).css(cssPoints).appendTo($board);
+    let $discards=$("<div>").attr("id","discards").text("discard count: "+player.discarded.length).css(cssDiscardCounter).appendTo($board);
 
     for (let i = 0; i < 3; i++) {
       let $handHolder=$("<div>").addClass("cardSlot").attr("id","cardSlot"+i).css(cssCardSlot).appendTo($("#playholder"));
@@ -84,21 +87,25 @@ const clickedInHand=(card)=>{
     if(whoseTurnIsIt==1){ //player 1
       const indx=player1.hand.indexOf(properDataText);
       player1.discarded.push(player1.hand[indx]); //---------added to discard pile
+      $("#discards").text("discard count: "+player1.discarded.length);
           dbg("discarded:"+player1.discarded);
       player1.hand.splice(indx,1); dbg("84."+player1.hand);//removed from hand
-      player1.points--; dbg("P2 pts: "+player2.points);
+      player1.points--; dbg("P1 pts: "+player1.points);
+      $("#points").text("points: "+player1.points); //--------update points
       $("#board").remove();
-      initBoard();
+      initBoard(player1);
       turn(player1);
     }
     else{ //player 2
       const indx=player2.hand.indexOf(properDataText);
       player2.discarded.push(player2.hand[indx]); //---------added to discard pile
+      $("#discards").text("discard count: "+player2.discarded.length);
           dbg("discarded:"+player2.discarded);
       player2.hand.splice(indx,1); dbg("84."+player2.hand);//removed from hand
       player2.points--; dbg("P2 pts: "+player2.points);
+      $("#points").text("points: "+player2.points); //--------update points
       $("#board").remove();
-      initBoard();
+      initBoard(player2);
       turn(player2);
     }
   }
@@ -117,7 +124,8 @@ const turn=(player)=>{
   isDiscarding=false; //--we want user to click discard every time they want to discard
   if(hasDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
-    player.points++; dbg("Player pts: "+player.points);
+    player.points++; dbg("Player pts: "+player.points); //get pts for drawing
+    $("#points").text("points: "+player.points); //--------update points
   }
   divHandMaker(player.hand);
   divInPlayMaker(player);
@@ -135,9 +143,10 @@ const turn=(player)=>{
       if(hasDrawn<2){ dbg("101.drawPile");
         draw(player.deck,player.hand,3);
         player.points++; dbg("Player pts: "+player.points);
-        dbg("102.player.hand:"+player.hand);
+        $("#points").text("points: "+player.points); //--------update points
+        dbg("144.player.hand:"+player.hand);
         $("#board").remove();
-        initBoard();
+        initBoard(player);
         turn(player);
       }
     });
@@ -230,7 +239,7 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     dbg("183.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("183.hand:"+player.hand);
 
     $("#board").remove();
-    initBoard();
+    initBoard(player);
     turn(player);
     dbg("-----/xfer*--------");
   }
@@ -326,6 +335,7 @@ const game2user_print=(player)=>{
   let endTurnClicked=false;
   let hasDrawn=0; //--------------remember to reset after end of turn, before next
   let isDiscarding=false;
+  let round=0;
 
 /////////////////////////////// CSS:
   let cssBoard={ //#board
@@ -580,6 +590,42 @@ const game2user_print=(player)=>{
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }
+  let cssRounds={
+    "position":"absolute",
+    "color":"#999999",
+    "top":"20px",
+    "left":"30px",
+    "font-size":"1em",
+    "height":"1.2em",
+    "width":"80px",
+    //"border":"1px solid #87C7A5",
+    "text-align":"left",
+    "margin":"0 1px 0 1px"
+  }
+  let cssPoints={
+    "position":"absolute",
+    "color":"#999999",
+    "top":"20px",
+    "left":"110px",
+    "font-size":"1em",
+    "height":"1.2em",
+    "width":"80px",
+    //"border":"1px solid #87C7A5",
+    "text-align":"left",
+    "margin":"0 1px 0 1px"
+  }
+  let cssDiscardCounter={
+    "position":"absolute",
+    "color":"#999999",
+    "top":"20px",
+    "left":"190px",
+    "font-size":"1em",
+    "height":"1.2em",
+    "width":"130px",
+    //"border":"1px solid #87C7A5",
+    "text-align":"left",
+    "margin":"0 1px 0 1px"
+  }
 
 //  ///////////////////////////////
 /////////////////////////////// TESTING:
@@ -587,7 +633,7 @@ const game2user_print=(player)=>{
 
 //  ///////////////////////////////
 /////////////////////////////// GAMEPLAY:
-initBoard();
+initBoard(player1);
 player1.deck=rCreateDeckArr(); //dbg(deck1);
 player2.deck=rCreateDeckArr(); //dbg(deck2);
 
@@ -600,18 +646,21 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
     if(endTurnClicked==true)
     {
       dbg("♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♠ ♥ ♦ ♣ ♠");
-      if(whoseTurnIsIt==1){ //PLAYER
+      if(whoseTurnIsIt==1){ //PLAYER 1
+        round++;
         hasDrawn=0;
+        $("#discards").text("discard count: "+player1.discarded.length);
         endTurnClicked=false;
         $("#board").remove();
-        initBoard();
+        initBoard(player1);
         turn(player1);
       }
       else{ //PLAYER 2
         hasDrawn=0;
+        $("#discards").text("discard count: "+player2.discarded.length);
         endTurnClicked=false;
         $("#board").remove();
-        initBoard();
+        initBoard(player2);
         turn(player2);
       }
     }

@@ -77,13 +77,21 @@ const divInPlayMaker=(whatPlayer)=>{ //
 }
 const clickedInHand=(card)=>{
   if(isDiscarding==true){ //remove cards clicked
-    const dbgTxt=card.text();
-    console.log(card.text());
+    const properDataText=typecastHotfix(card.text());
+    console.log("84."+properDataText+" "+typeof(properDataText));
     if(whoseTurnIsIt==1){ //player 1
-
+      const indx=player1.hand.indexOf(properDataText);
+      player1.hand.splice(indx,1); dbg("84."+player1.hand);
+      $("#board").remove();
+      initBoard();
+      turn(player1);
     }
     else{ //player 2
-
+      const indx=player2.hand.indexOf(properDataText);
+      player2.hand.splice(indx,1); dbg("84."+player2.hand);
+      $("#board").remove();
+      initBoard();
+      turn(player2);
     }
   }
   else{

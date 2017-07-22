@@ -21,6 +21,7 @@ const initBoard=(player)=>{
       const $shopPile=$("<div>").attr("id","shopPile").css(cssShopPile).appendTo($("#board"));
       $shopPile.append("S<br>H<br>O<br>P").on("click",()=>{
         dbg(" ♦ shop clicked ♦ ");
+        buyCardBack(player);
       });
     }
     for (let i = 0; i < 3; i++) {
@@ -97,9 +98,7 @@ const clickedInHand=(card)=>{
       player1.hand.splice(indx,1); dbg("84."+player1.hand);//removed from hand
       player1.points--; dbg("P1 pts: "+player1.points);
       $("#points").text("points: "+player1.points); //--------update points
-      $("#board").remove();
-      initBoard(player1);
-      turn(player1);
+      refresh(player1);
     }
     else{ //player 2
       const indx=player2.hand.indexOf(properDataText);
@@ -109,9 +108,7 @@ const clickedInHand=(card)=>{
       player2.hand.splice(indx,1); dbg("84."+player2.hand);//removed from hand
       player2.points--; dbg("P2 pts: "+player2.points);
       $("#points").text("points: "+player2.points); //--------update points
-      $("#board").remove();
-      initBoard(player2);
-      turn(player2);
+      refresh(player2);
     }
   }
   else{
@@ -129,7 +126,7 @@ const turn=(player)=>{
   isDiscarding=false; //--we want user to click discard every time they want to discard
   if(hasDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
-    player.points++; dbg("Player pts: "+player.points); //get pts for drawing
+    player.points+=earnFirstDraw; dbg("Player pts: "+player.points); //get pts for drawing
     $("#points").text("points: "+player.points); //--------update points
   }
   divHandMaker(player.hand);
@@ -147,18 +144,21 @@ const turn=(player)=>{
     $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
       if(hasDrawn<2){ dbg("101.drawPile");
         draw(player.deck,player.hand,3);
-        player.points++; dbg("Player pts: "+player.points);
+        player.points+=earnSecondDraw; dbg("Player pts: "+player.points);
         $("#points").text("points: "+player.points); //--------update points
         dbg("144.player.hand:"+player.hand);
-        $("#board").remove();
-        initBoard(player);
-        turn(player);
+        refresh(player);
       }
     });
   }
   dbg("Player: "+player.name);
   dbg("Player: "+player.deck);
   dbg("Player: "+player.hand);
+}
+const refresh=(player)=>{
+  $("#board").remove();
+  initBoard(player);
+  turn(player);
 }
 const assessIfPlayable=(whoseTurn,whatCard)=>{
   let playableArr=-1;
@@ -243,9 +243,7 @@ const xferHandCard2Play=(selectorId,player,card)=>{ dbg("-----xferHandCard2Play-
     player.hand.splice(handIndex,1);//remove card from player.hand
     dbg("183.inplay@slotIndex"+slotIndex+":"+player.inplay[slotIndex]); dbg("183.hand:"+player.hand);
 
-    $("#board").remove();
-    initBoard(player);
-    turn(player);
+    refresh(player);
     dbg("-----/xfer*--------");
   }
 }
@@ -281,6 +279,25 @@ const game2user_print=(player)=>{
     isDiscarding=true;
     dbg("222.discard clicked");
   });
+}
+const buyCardBack=(player)=>{
+  if(player.discarded.length>0){
+    if(player.points>=buyDiscardPrice){
+      player.points-=buyDiscardPrice;
+      const indexDiscardedCard=randInt((player.discarded.length-1),0); dbg("indexDiscardedCard: "+indexDiscardedCard);
+      dbg("player.discarded[indexDiscardedCard]: "+player.discarded[indexDiscardedCard])
+      player.hand.push(player.discarded[indexDiscardedCard]);
+      player.discarded.splice(indexDiscardedCard,1);
+      dbg("player.hand: "+player.hand);
+      refresh(player);
+    }
+    else{
+      dbg("Player hasn't enough points")
+    }
+  }
+  else{
+    dbg("player hasn't any discards")
+  }
 }
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
@@ -335,6 +352,9 @@ const game2user_print=(player)=>{
     discarded:[],
     points:0
   };
+  const buyDiscardPrice=5;
+  const earnFirstDraw=3;
+  const earnSecondDraw=1;
   let isGameOn=true;
   let whoseTurnIsIt=1;
   let endTurnClicked=false;
@@ -672,24 +692,17 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
         hasDrawn=0;
         $("#discards").text("discard count: "+player1.discarded.length);
         endTurnClicked=false;
-        $("#board").remove();
-        initBoard(player1);
-        turn(player1);
+        refresh(player1);
       }
       else{ //PLAYER 2
         hasDrawn=0;
         $("#discards").text("discard count: "+player2.discarded.length);
         endTurnClicked=false;
-        $("#board").remove();
-        initBoard(player2);
-        turn(player2);
+        refresh(player2);
       }
     }
   },1000);
 // }
-
-
-
 
 })//EOF
 //  ///////////////////////////////

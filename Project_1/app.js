@@ -106,6 +106,7 @@ const clickedInPlay=()=>{
   dbg("clickedInPlay");
 }
 const turn=(player)=>{
+  isDiscarding=false; //--we want user to click discard every time they want to discard
   if(hasDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
   }
@@ -246,6 +247,7 @@ const game2user_print=(player)=>{
   const $discardBtn=$("<div>").css(cssGame2UserButton1).appendTo("#game2user").text("discard");
   $discardBtn.attr("id","discardBtn").on("click",()=>{
     $("#game2userText").text("Carefully click each card you wish to discard. They are gone forever.");
+    $("#discardBtn").css(cssDiscardActive);
     isDiscarding=true;
     dbg("222.discard clicked");
   });
@@ -488,6 +490,22 @@ const game2user_print=(player)=>{
     "vertical-align":"middle",
     "margin":"0 1px 0 1px"
   }
+  let cssDiscardActive={
+    "background-color":"#220000",
+    "position":"absolute",
+    "color":"#FF0000",
+    "top":"180px",
+    "left":"160px",
+    "font-size":"1em",
+    "height":"60px",
+    "width":"100px",
+    "border-radius":"10%",
+    "border":"3px solid #FF0000",
+    "text-align":"center",
+    "line-height":"60px",
+    "vertical-align":"middle",
+    "margin":"0 1px 0 1px"
+  }
 
 //  ///////////////////////////////
 /////////////////////////////// TESTING:
@@ -507,7 +525,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
     if(endTurnClicked==true)
     {
       if(whoseTurnIsIt==1){
-        isDiscarding=false;
+
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();
@@ -515,7 +533,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
         turn(player1);
       }
       else{
-        isDiscarding=false;
+
         hasDrawn=0;
         endTurnClicked=false;
         $("#board").remove();

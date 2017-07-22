@@ -21,7 +21,7 @@ const initBoard=()=>{
   }
 const rCreateDeckArr=()=>{
   let arr=[];
-  for (let ii=1;ii<4;ii++){
+  for (let ii=0;ii<4;ii++){
     for(let i=1;i<=13;i++){
       if(notRoyal(i)){arr.push(i);}
       else{arr.push(royals[i]);}
@@ -86,6 +86,7 @@ const clickedInHand=(card)=>{
       player1.discarded.push(player1.hand[indx]); //---------added to discard pile
           dbg("discarded:"+player1.discarded);
       player1.hand.splice(indx,1); dbg("84."+player1.hand);//removed from hand
+      player1.points--; dbg("P2 pts: "+player2.points);
       $("#board").remove();
       initBoard();
       turn(player1);
@@ -95,6 +96,7 @@ const clickedInHand=(card)=>{
       player2.discarded.push(player2.hand[indx]); //---------added to discard pile
           dbg("discarded:"+player2.discarded);
       player2.hand.splice(indx,1); dbg("84."+player2.hand);//removed from hand
+      player2.points--; dbg("P2 pts: "+player2.points);
       $("#board").remove();
       initBoard();
       turn(player2);
@@ -115,6 +117,7 @@ const turn=(player)=>{
   isDiscarding=false; //--we want user to click discard every time they want to discard
   if(hasDrawn==0){ //we only want autodraw at start of turn
     draw(player.deck,player.hand,3);
+    player.points++; dbg("Player pts: "+player.points);
   }
   divHandMaker(player.hand);
   divInPlayMaker(player);
@@ -131,6 +134,7 @@ const turn=(player)=>{
     $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
       if(hasDrawn<2){ dbg("101.drawPile");
         draw(player.deck,player.hand,3);
+        player.points++; dbg("Player pts: "+player.points);
         dbg("102.player.hand:"+player.hand);
         $("#board").remove();
         initBoard();
@@ -306,14 +310,16 @@ const game2user_print=(player)=>{
     inplay:[["A"],[],[]],
     hand:[],
     deck:[],
-    discarded:[]
+    discarded:[],
+    points:0
   };
   let player2={
     name:"Player 2",
     inplay:[["A"],[],[]], //------NOTE: this, and player1, was initialized with
     hand:[],              //A for testing, we want them to actually choose the
     deck:[],               //A they start with once suits are implemented
-    discarded:[]
+    discarded:[],
+    points:0
   };
   let isGameOn=true;
   let whoseTurnIsIt=1;
@@ -588,10 +594,12 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
 // while(isGameOn){
   whoseTurnIsIt=1;
 //-------------------------Game loop vvv
+  dbg("////♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣////");
   turn(player1); //starting game with player1
   let G=setInterval(()=>{
     if(endTurnClicked==true)
     {
+      dbg("♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♠ ♥ ♦ ♣ ♠");
       if(whoseTurnIsIt==1){ //PLAYER
         hasDrawn=0;
         endTurnClicked=false;

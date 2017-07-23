@@ -126,7 +126,12 @@ const clickedInPlay=()=>{
 const turn=(player)=>{
   isDiscarding=false; //--we want user to click discard every time they want to discard
   if(hasDrawn==0){ //we only want autodraw at start of turn
-    draw(player.deck,player.hand,3);
+    if(player.deck.length>=3){
+      draw(player.deck,player.hand,3);
+    }
+    else{
+      draw(player.deck,player.hand,player.deck.length);
+    }
     player.points+=earnFirstDraw; dbg("Player pts: "+player.points); //get pts for drawing
     $("#points").text("points: "+player.points); //--------update points
   }
@@ -144,7 +149,14 @@ const turn=(player)=>{
     const $drawPile=$("<div>").attr("id","drawPile").css(cssDrawPile).appendTo($("#board"));
     $drawPile.append("D<br>R<br>A<br>W").on("click",()=>{
       if(hasDrawn<2){ dbg("101.drawPile");
+      if(player.deck.length>=3){
         draw(player.deck,player.hand,3);
+      }
+      else{
+        draw(player.deck,player.hand,player.deck.length);
+      }
+      player.points+=earnFirstDraw; dbg("Player pts: "+player.points); //get pts for drawing
+      $("#points").text("points: "+player.points); //--------update points
         player.points+=earnSecondDraw; dbg("Player pts: "+player.points);
         $("#points").text("points: "+player.points); //--------update points
         dbg("144.player.hand:"+player.hand);

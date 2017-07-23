@@ -30,11 +30,13 @@ The top of the board contains instructions to the player, as well as two buttons
 
 ### ♦ Turn ♦
 #### draw
-The initial draw of 3 cards (automatic) at the start of each turn
-- yields `+3` points.
+The initial (automatic) draw phase at the start of each turn
+- yields `+3` points, whether or not there are cards (players can wait to buy back cards if stuck)
+- yields `+3` cards OR the remainder of draw deck if less than 3 remain.
 At any time, a player may opt for a second additional draw of 3 cards in a round.
 - by clicking the `DRAW` deck at the right of the screen.
 - BUT they will only receive `+1` point for this second draw.
+- AND only if there are still cards.
 #### play a card
 Straights must work sequentially up from Ace, eg. "A,2,3,4..."
 Only the first and last cards of a straight are viewable.

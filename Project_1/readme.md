@@ -11,11 +11,11 @@ javascript <br>
 [jquery 3.](https://code.jquery.com/) <br>
 [live link](https://makingentropy.github.io/Project_1/)
 
-## Game Objective
+## ♣♣♣ Game Objective ♣♣♣
 Build 3 complete straights (from A to K) before your opponent.
 If both players complete their 3 straights in the same round, winner also has highest score.
 
-## Setup
+## ♦♦♦ Setup ♦♦♦
 Each player begins with their own deck of cards.
 - There are no suits in this MVP version, so a player has four sets of identical cards in their deck.
 One "A" card is removed from each player's deck and is placed in each player's play area, the middle section of the board.
@@ -23,11 +23,11 @@ The top of the board contains instructions to the player, as well as two buttons
 - `discard`: user clicks this before each card discarded, it will light up red
 - `end turn`: turns the board over to the opposing player
 
-## GAMEPLAY
-### Round
+## ♥♥♥ GAMEPLAY ♥♥♥
+### ♦ Round ♦
 -A round consists of 1 turn by Player 1 and 1 turn by Player 2
 
-### TURN
+### ♦ Turn ♦
 #### draw
 The initial draw of 3 cards (automatic) at the start of each turn
 - yields `+3` points.
@@ -54,7 +54,7 @@ If a player has less than 8 cards, click `end turn`
 - to turn the board over to the other player
 - if this is at the end of Player 2's turn, it will begin a new round
 
-### win or lose
+### ♦ Win or Lose ♦
 If one or both players have completed 3 straights by the END of a round the winner is
 - the player wins who completed all 3 (if the other did not)
 - or the player wins who has the highest score (if both won)

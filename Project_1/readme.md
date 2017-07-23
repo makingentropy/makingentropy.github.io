@@ -1,4 +1,4 @@
-# WDI-Gizmo Eric Chance Project 1
+# WDI-Gizmo Project 1
 ---
 Title: Straight to Power, light version.
 ---

@@ -82,7 +82,7 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 ## DESIGN NOTES FOR PROJECT ONE
 
 
-I structured my for readability and ease of use, though I gave up in the `FUNCTIONS` section at some point in the interest of speed (and I think it shows in that another coder coming into it might be somewhat befuddled). There are at least a couple of functions in that section that should be moved to `HELPER FUNCTIONS`, and I might could break down some of the other functions.
+I structured my app.js for personal readability and ease of use, though I gave up in the `FUNCTIONS` section at some point in the interest of speed (and I think it shows in that another coder coming into it might be somewhat befuddled). There are at least a couple of functions in that section that should be moved to `HELPER FUNCTIONS`, and I might could break down some of the other functions.
 
 Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
 
@@ -132,4 +132,6 @@ and
 I really liked the breakdown Thom did in class of the difference between var and let (how var bleeds out of for loop declarations).  I would like to see a similarly thorough explanation for `function` vs `=()=>`
 
 ## pointless gripes into the ether
-I really, with a passion, despise implicit datatypes. Related Q: Is there shorthand in javascript to typecast (like say between float, string, int) or are there only methods like parseInt()?
+I really, with a passion, despise implicit datatypes. It's asinine to be beholden to handling data strictly on the coder side but then have it be handled not-so-strictly on the code side. C'mon, javascript, at least give us an indexOf() that can be used with a little loose equivalence if we choose to sync with your capricious nature.
+
+Related Q: Is there shorthand in javascript to quickly typecast (like say between float, string, int) or are there only methods, like parseInt()?

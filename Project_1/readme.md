@@ -86,6 +86,8 @@ I structured my for readability and ease of use, though I gave up in the `FUNCTI
 
 Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
 
+CODE FORMAT:
+---
 `ONLOAD START`<br>
 
 `DEBUG FUNCTION`<br>
@@ -110,6 +112,7 @@ Ideally, I think I should want all the big drivers of the action grouped at the 
 - this includes a timer that functions as a loop <br>
 
 `ONLOAD END`<br>
+
 ---
 ## additional design notes
 I tried to structure app.js with the idea that all the action was just taking place between arrays and variables stored in player objects. The graphical elements just served to visualize this, so I tried to stay away from relying on data stored in divs to govern any part of the game.  This allowed me to put most of my div creation functionality (including all the senior-level ancestors) in a single function (initBoard). Therefore, rather than moving divs around, I could simply discard the board after every play and rebuild it instantly based on the new values in the player objects. I believe this saved me a lot of headache- the main hurdle was getting all the logic working. However, I did not overthink the initial design because I thought what needed to happen seemed straightforward and that means there are areas that could be broken down better and put into a more navigable order along the lines of my tiered layout. There is plenty of room to streamline the code for readability.

@@ -49,6 +49,7 @@ Maximum cards in the hand is 7
 All discarded cards go to the `SHOP`,
 - a deck appearing just above the `DRAW` deck after first discard.
 - a player receives a `-5` point debt to buy a RANDOM card from the `SHOP`
+- a player must have at least 5 points to make purchase
 - bought cards are added directly to the hand
 #### end turn
 If a player has less than 8 cards, click `end turn`
@@ -113,7 +114,7 @@ Broad Code Structure of app.js:
 - the initiating calls and logic that keeps the game moving and repeating
 - this includes a timer that functions as a loop <br>
 
-`ONLOAD END`<br> 
+`ONLOAD END`<br>
 
 ---
 ## additional design notes

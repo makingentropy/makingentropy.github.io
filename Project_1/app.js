@@ -754,9 +754,9 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
   let G=setInterval(()=>{
     if(endTurnClicked==true)
     {
-      isWinning();//checks if someone won
       dbg("♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♠ ♥ ♦ ♣ ♠");
       if(whoseTurnIsIt==1){ //PLAYER 1
+        isWinning();//checks if someone won
         round++;
         hasDrawn=0;
         $("#discards").text("discard count: "+player1.discarded.length);

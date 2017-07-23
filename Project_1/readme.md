@@ -15,7 +15,7 @@ javascript <br>
 Build 3 complete straights (from A to K) before your opponent.
 If both players complete their 3 straights in the same round, winner also has highest score.
 
-## ♦♦♦ Setup ♦♦♦
+## ♠♠♠ Setup ♠♠♠
 Each player begins with their own deck of cards.
 - There are no suits in this MVP version, so a player has four sets of identical cards in their deck.
 One "A" card is removed from each player's deck and is placed in each player's play area, the middle section of the board.
@@ -83,7 +83,7 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 <br>
 ---
 <br>
-# Project 1 Design Notes
+## Project 1 Design Notes
 ---
 
 ## Structure and rationale of app.js

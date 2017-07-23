@@ -2,13 +2,13 @@
 ---
 Title: Straight to Power, light version.
 ---
-Author: echance
-Version: Original Game, this is the mvp version.
-Tested on: Chrome ver. 59.0.3071.115 (Official Build) (64-bit), Windows 7
-Created using:
-[Atom ver. 1.18.0](https://atom.io/)
-javascript
-[jquery 3.](https://code.jquery.com/)
+Author: echance <br>
+Version: Original Game, this is the mvp version. <br>
+Tested on: Chrome ver. 59.0.3071.115 (Official Build) (64-bit), Windows 7 <br>
+Created using: <br>
+[Atom ver. 1.18.0](https://atom.io/) <br>
+javascript <br>
+[jquery 3.](https://code.jquery.com/) <br>
 
 ## Game Objective
 Build 3 complete straights before your opponent.
@@ -62,7 +62,7 @@ If one or both players have completed 3 straights by the END of a round the winn
 After completion, I lost 2 lost games, figured out what I thought was a good strategy, and won
 - (against myself) in 16 rounds.
 
-Spoilers:
+##### spoilers:
 - greater risk to end game by taking early extra draws, but better chance of finishing first
 - more points in late game when you need them, if you avoid extra draw.
 - if you have to discard, discard highest cards and buy them back at the end when store is full of only high cards.

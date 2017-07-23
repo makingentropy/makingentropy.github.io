@@ -88,7 +88,7 @@ I structured my app.js for personal readability and ease of use, though I gave u
 
 Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
 
-CODE FORMAT:
+Broad Code Structure of app.js:
 ---
 `ONLOAD START`<br>
 

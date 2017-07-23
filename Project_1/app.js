@@ -36,6 +36,7 @@ const rCreateDeckArr=()=>{
       else{arr.push(royals[i]);}
     }
   }
+  arr.splice(0,1); //remove the first A since we are giving them one to start
   return arr;
 }
 const draw=(deck,hand,totalNumCards)=>{

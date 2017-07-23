@@ -308,7 +308,7 @@ const isWinning=()=>{
       alert("Player 1 narrowly won by "+p1MinusP2+" points!");
     }
     else if(p1MinusP2<0){
-      alert("Player 1 narrowly won by "+(p1MinusP2*(-1))+" points!");
+      alert("Player 2 narrowly won by "+(p1MinusP2*(-1))+" points!");
     }
     else{
       alert("A perfect tie!");
@@ -317,7 +317,7 @@ const isWinning=()=>{
   else if(player1won){
     alert("Player 1 won!");
   }
-  else if(player1won){
+  else if(player2won){
     alert("Player 2 won!");
   }
   else{}//nothing
@@ -325,6 +325,7 @@ const isWinning=()=>{
 const rTrueIfWon=(player)=>{
   let numCompletions=0;
   for (let i = 0; i < player.inplay.length; i++) {
+    dbg(player.name+" length of arr"+i+": "+player.inplay[i].length);
     if(player.inplay[i].length==13){
       numCompletions++;
     }
@@ -373,7 +374,23 @@ const rTrueIfWon=(player)=>{
     A:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10,
     J:11, Q:12, K:13
   }
-  const suits=["♠","♥","♦","♣"];
+  // const suits=["♠","♥","♦","♣"];
+  // let player1={
+  //   name:"Player 1",
+  //   inplay:[["A","2","3","4","5","6","7","8","9","10","J","Q","K"],["A","2","3","4","5","6","7","8","9","10","J","Q"],["A","2","3","4","5","6","7","8","9","10","J","Q","K"]],
+  //   hand:[],
+  //   deck:[],
+  //   discarded:[],
+  //   points:0
+  // };
+  // let player2={
+  //   name:"Player 2",
+  //   inplay:[["A","2","3","4","5","6","7","8","9","10","J","Q","K"],["A","2","3","4","5","6","7","8","9","10","J","Q","K"],["A","2","3","4","5","6","7","8","9","10","J","Q","K"]], //------NOTE: this, and player1, was initialized with
+  //   hand:[],              //A for testing, we want them to actually choose the
+  //   deck:[],               //A they start with once suits are implemented
+  //   discarded:[],
+  //   points:4
+  // };
   let player1={
     name:"Player 1",
     inplay:[["A"],[],[]],

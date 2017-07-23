@@ -63,7 +63,7 @@ If one or both players have completed 3 straights by the END of a round the winn
 ---
 ---
 <br>
----
+
 
 ##### Things to fix:
 -discard cannot be toggled off if user changed their mind
@@ -78,6 +78,7 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 - greater risk to end game by taking early extra draws, but better chance of finishing first
 - more points in late game when you need them, if you avoid extra draw.
 - if you have to discard, discard highest cards and buy them back at the end when store is full of only high cards.
+---
 ---
 
 ## DESIGN NOTES FOR PROJECT ONE

@@ -318,10 +318,10 @@ const isWinning=()=>{
   if(player1won&&player2won){
     const p1MinusP2=player1.points-player2.points;
     if(p1MinusP2>0){
-      alert("Player 1 narrowly won by "+p1MinusP2+" points!");
+      alert("Player 1 narrowly won with "+p1MinusP2+" points!");
     }
     else if(p1MinusP2<0){
-      alert("Player 2 narrowly won by "+(p1MinusP2*(-1))+" points!");
+      alert("Player 2 narrowly won with "+(p1MinusP2*(-1))+" points!");
     }
     else{
       alert("A perfect tie!");

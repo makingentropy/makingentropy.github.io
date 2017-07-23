@@ -105,7 +105,7 @@ CODE FORMAT:
 - easily accessible variables, including player objects <br>
 
 `CSS`<br>
-- all CSS used in-game is saved here <br>
+- all CSS used in-game is objectified here and referenced elsewhere by object name for styling everything. This seemed more sensible for workflow to me than switching between files<br>
 
 `GAME calls`<br>
 - the initiating calls and logic that keeps the game moving and repeating

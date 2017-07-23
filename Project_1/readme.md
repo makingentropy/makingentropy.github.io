@@ -87,21 +87,28 @@ I structured my for readability and ease of use, though I gave up in the `FUNCTI
 Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
 
 `ONLOAD START`<br>
+
 `DEBUG FUNCTION`<br>
 - this script is just a quick way to both console.log and turn them all off with one variable rather than hunting down all the ones I didn't erase or comment out
 - I like to print to console A LOT when working. A LOT. Even when I don't strictly need to (this saves me from myself 9 times out of 10). Ideally, I think the function name should have one or two keystrokes. I will probably experiment in next big project with a series of d#() functions, where # is a number, allowing me to toggle off sections of console logs rather than using one to control them all. Using just one meant I still had to delete and comment some out by hand when the log became too verbose (time waste!).<br>
+
 `FUNCTIONS`<br>
-- the primary functions
+- the primary functions<br>
+
 `HELPER FUNCTIONS`<br>
 - functions that don't drive the game but are necessary
 - I did a little digging and found that the Fisher-Yates shuffle function is supposed to be more truly randomized than many other methods, so I copied this algorithm and commented in a link to the source<br>
+
 `Global variables`<br>
-- easily accessible variables, including player objects<br>
+- easily accessible variables, including player objects <br>
+
 `CSS`<br>
-- all CSS used in-game is saved here
+- all CSS used in-game is saved here <br>
+
 `GAME calls`<br>
 - the initiating calls and logic that keeps the game moving and repeating
-- this includes a timer that functions as a loop<br>
+- this includes a timer that functions as a loop <br>
+
 `ONLOAD END`<br>
 ---
 ## additional design notes

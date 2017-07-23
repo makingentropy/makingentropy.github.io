@@ -13,7 +13,7 @@ javascript <br>
 
 ## Game Objective
 Build 3 complete straights (from A to K) before your opponent.
-If both complete their 3 straights in the same round, winner also has highest score.
+If both players complete their 3 straights in the same round, winner also has highest score.
 
 ## Setup
 Each player begins with their own deck of cards.
@@ -53,14 +53,18 @@ All discarded cards go to the `SHOP`,
 If a player has less than 8 cards, click `end turn`
 - to turn the board over to the other player
 - if this is at the end of Player 2's turn, it will begin a new round
-#### win or lose
+
+### win or lose
 If one or both players have completed 3 straights by the END of a round the winner is
 - the player wins who completed all 3 (if the other did not)
 - or the player wins who has the highest score (if both won)
 
 ---
 ---
-
+<br>
+---
+<br>
+##
 ##### Things to fix:
 -discard cannot be toggled off if user changed their mind
 -blank cards are dealt from the deck at the end.
@@ -74,3 +78,50 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 - greater risk to end game by taking early extra draws, but better chance of finishing first
 - more points in late game when you need them, if you avoid extra draw.
 - if you have to discard, discard highest cards and buy them back at the end when store is full of only high cards.
+---
+---
+<br>
+---
+<br>
+# Project 1 Design Notes
+---
+
+## Structure and rationale of app.js
+I structured my for readability, and ease of use, though I gave up in the `FUNCTIONS` section at some point in the interest of speed (and I think it shows in that another coder coming into it might be somewhat befuddled). There are at least a couple of functions in that section that should be moved to `HELPER FUNCTIONS`, and I might could break down some of the other functions. Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
+`ONLOAD START`
+&nbsp;&nbsp;&nbsp;&nbsp;`DEBUG FUNCTION`
+&nbsp;&nbsp;&nbsp;&nbsp; - this script is just a quick way to both console.log and turn them all off with one variable rather than hunting down all the ones I didn't erase or comment out
+&nbsp;&nbsp;&nbsp;&nbsp; - I like to print to console A LOT when working. A LOT. Even when I don't strictly need to (this saves me from myself 9 times out of 10). Ideally, I think the function name should have one or two keystrokes. I will probably experiment in next big project with a series of d#() functions, where # is a number, allowing me to toggle off sections of console logs rather than using one to control them all. Using just one meant I still had to delete and comment some out by hand when the log became too verbose (time waste!).
+&nbsp;&nbsp;&nbsp;&nbsp;`FUNCTIONS`
+&nbsp;&nbsp;&nbsp;&nbsp; - the primary functions
+&nbsp;&nbsp;&nbsp;&nbsp;`HELPER FUNCTIONS`
+&nbsp;&nbsp;&nbsp;&nbsp; - functions that don't drive the game but are necessary
+&nbsp;&nbsp;&nbsp;&nbsp; - I did a little digging and found that the Fisher-Yates shuffle function is supposed to be more truly randomized than many other methods, so I copied this algorithm and commented in a link to the source
+&nbsp;&nbsp;&nbsp;&nbsp;`Global variables`
+&nbsp;&nbsp;&nbsp;&nbsp; - easily accessible variables, including player objects
+&nbsp;&nbsp;&nbsp;&nbsp;`CSS`
+&nbsp;&nbsp;&nbsp;&nbsp; - all CSS used in-game is saved here
+&nbsp;&nbsp;&nbsp;&nbsp;`GAME calls`
+&nbsp;&nbsp;&nbsp;&nbsp; - the initiating calls and logic that keeps the game moving and repeating
+&nbsp;&nbsp;&nbsp;&nbsp; - this includes a timer that functions as a loop
+`ONLOAD END`
+---
+## additional design notes
+I tried to structure app.js with the idea that all the action was just taking place between arrays and variables stored in player objects. The graphical elements just served to visualize this, so I tried to stay away from relying on data stored in divs to govern any part of the game.  This allowed me to put most of my div creation functionality (including all the senior-level ancestors) in a single function (initBoard). Therefore, rather than moving divs around, I could simply discard the board after every play and rebuild it instantly based on the new values in the player objects. I believe this saved me a lot of headache- the main hurdle was getting all the logic working. However, I did not overthink the initial design because I thought what needed to happen seemed straightforward and that means there are areas that could be broken down better and put into a more navigable order along the lines of my tiered layout. There is plenty of room to streamline the code for readability.
+
+## tangential journeys
+At one point I sought to construct a function that would operate with a set of different rules dependent upon how many arguments I fed it (a la how text() can either input or return depending how you use it). This led me to find the `arguments` javascript object. I was excited but then couldn't get it to work. It wasn't until the next day, when I had already shifted my approach, that I revisted the topic on a call with another student and realized that the arrow style is what's breaking it. What is functionally different under the hood between:
+```const foo=()=>{
+  doing stuff with arguments[n] but broken
+}
+```
+and
+```function foo(){
+  arguments[n] sweet spot
+}
+```
+??
+I really liked the breakdown Thom did in class of the difference between var and let (how var bleeds out of for loop declarations).  I would like to see a similarly thorough explanation for `function` vs `=()=>`
+
+## pointless gripes into the ether
+I really, with a passion, despise implicit datatypes. Related Q: Is there shorthand in javascript to typecast (like say between float, string, int) or are there only methods like parseInt()?

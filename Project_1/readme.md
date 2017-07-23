@@ -11,7 +11,7 @@ javascript <br>
 [jquery 3.](https://code.jquery.com/) <br>
 
 ## Game Objective
-Build 3 complete straights before your opponent.
+Build 3 complete straights (from A to K) before your opponent.
 If both complete their 3 straights in the same round, winner also has highest score.
 
 ## Setup

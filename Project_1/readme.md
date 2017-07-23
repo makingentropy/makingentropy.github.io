@@ -34,6 +34,12 @@ The initial draw of 3 cards (automatic) at the start of each turn
 At any time, a player may opt for a second additional draw of 3 cards in a round.
 - by clicking the `DRAW` deck at the right of the screen.
 - BUT they will only receive `+1` point for this second draw.
+#### play a card
+Straights must work sequentially up from Ace, eg. "A,2,3,4..."
+Only the first and last cards of a straight are viewable.
+To play a card, click a card in your hand
+- arrows appears under cards in the play area, under valid targets
+- click the arrow to move the card out of your hand, to the designated area.
 #### discard
 Maximum cards in the hand is 7
 - a player must `discard` down to 7 before they may click `end turn`
@@ -52,6 +58,7 @@ If one or both players have completed 3 straights by the END of a round the winn
 - the player wins who completed all 3 (if the other did not)
 - or the player wins who has the highest score (if both won)
 
+---
 ---
 
 ##### Things to fix:

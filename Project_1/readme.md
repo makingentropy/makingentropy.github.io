@@ -9,6 +9,7 @@ Created using: <br>
 [Atom ver. 1.18.0](https://atom.io/) <br>
 javascript <br>
 [jquery 3.](https://code.jquery.com/) <br>
+[live link](https://makingentropy.github.io/Project_1/)
 
 ## Game Objective
 Build 3 complete straights (from A to K) before your opponent.

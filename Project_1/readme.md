@@ -86,7 +86,7 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 ## Project 1 Design Notes
 ---
 ### Structure and rationale of app.js
----
+
 I structured my for readability, and ease of use, though I gave up in the `FUNCTIONS` section at some point in the interest of speed (and I think it shows in that another coder coming into it might be somewhat befuddled). There are at least a couple of functions in that section that should be moved to `HELPER FUNCTIONS`, and I might could break down some of the other functions. Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
 `ONLOAD START`
 &nbsp;&nbsp;&nbsp;&nbsp;`DEBUG FUNCTION`

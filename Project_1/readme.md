@@ -113,7 +113,7 @@ Broad Code Structure of app.js:
 - the initiating calls and logic that keeps the game moving and repeating
 - this includes a timer that functions as a loop <br>
 
-`ONLOAD END`<br>
+`ONLOAD END`<br> 
 
 ---
 ## additional design notes

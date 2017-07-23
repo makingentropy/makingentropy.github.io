@@ -78,10 +78,6 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 - more points in late game when you need them, if you avoid extra draw.
 - if you have to discard, discard highest cards and buy them back at the end when store is full of only high cards.
 ---
- Project 1 Design Notes
----
-Structure and rationale of app.js:
-
 `ONLOAD START`
 &nbsp;&nbsp;&nbsp;&nbsp;`DEBUG FUNCTION`
 &nbsp;&nbsp;&nbsp;&nbsp; - this script is just a quick way to both console.log and turn them all off with one variable rather than hunting down all the ones I didn't erase or comment out

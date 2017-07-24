@@ -9,6 +9,7 @@ Created using: <br>
 [Atom ver. 1.18.0](https://atom.io/) <br>
 javascript <br>
 [jquery 3.](https://code.jquery.com/) <br>
+Filter Forge 4 & Adobe Photoshop CS (for wood grain images)
 
 [game live link](https://makingentropy.github.io/Project_1/)
 

@@ -1,7 +1,7 @@
 $(()=>{
 //  ///////////////////////////////
 /////////////////////////////// GLOBAL DEBUG:
-const dbg=(s)=>{if(true){ //set to false to hide debug logs
+const dbg=(s)=>{if(false){ //set to false to hide debug logs
   console.log(" | "+s);}
 }
     // dbg("test");
@@ -17,6 +17,9 @@ const initBoard=(player)=>{
     let $rounds=$("<div>").attr("id","rounds").css(cssRounds).text("round: "+round).appendTo($board);
     let $points=$("<div>").attr("id","points").text("points: "+player.points).css(cssPoints).appendTo($board);
     let $discards=$("<div>").attr("id","discards").text("discard count: "+player.discarded.length).css(cssDiscardCounter).appendTo($board);
+    let $helpBtn=$("<div>").attr("id","helpBtn").css(cssHelpBtn).text("help").appendTo($board).on("click",()=>{
+      inHelp();
+    });
     if(player.discarded.length>0){
       const $shopPile=$("<div>").attr("id","shopPile").css(cssShopPile).appendTo($("#board"));
       $shopPile.append("S<br>H<br>O<br>P").on("click",()=>{
@@ -351,6 +354,22 @@ const rTrueIfWon=(player)=>{
     return false;
   }
 }
+const inHelp=()=>{
+  const helptext="S t r a i g h t  -to-  P o w e r<br><br>How to play:<br><br>"+
+  "[Win]<br>* build 3 straights from A to K before your opponent.<br>"+
+  "* If both players win in the same round, the highest score wins.<br><br>"+
+  "[Score Points]<br>* +3 pts at the beginning of each turn when you autodraw 3 cards,<br>"+
+  "* +1 pts if you take an extra draw of 3 cards by clicking the draw pile.<br>"+
+  "* You may take one extra draw of 3 cards per turn if you choose<br>"+
+  "* -1 pts penalty for every card you discard<br><br>"+
+  "[Shop]<br>* All discarded cards go to the shop pile. You may buy them back for -5 pts<br><br><br>"+
+  "- click to close -"
+  const $helpCard=$("<div>").attr("id","helpCard").css(cssHelp).appendTo($("#board")).append(helptext);
+  $helpCard.on("click",()=>{
+      isInHelp=false;
+      $("#helpCard").remove();
+  })
+}
 /////////////////////////////// HELPER FUNC:
       const notRoyal=(n)=>{ //preserving brain power when tired
         if(n>1&&n<11){return true;}
@@ -424,6 +443,7 @@ const rTrueIfWon=(player)=>{
   const earnFirstDraw=3;
   const earnSecondDraw=1;
   let isGameOn=true;
+  let isInHelp=true;
   let whoseTurnIsIt=1;
   let endTurnClicked=false;
   let hasDrawn=0; //--------------remember to reset after end of turn, before next
@@ -732,6 +752,35 @@ const rTrueIfWon=(player)=>{
     "height":"1.2em",
     "width":"130px",
     //"border":"1px solid #87C7A5",
+    "text-align":"left",
+    "margin":"0 1px 0 1px"
+  }
+  let cssHelp={
+    "position":"absolute",
+    "top":"20px",
+    "left":"10px",
+    "display":"flex",
+    "background-color":"#002200",
+    "color":"#87C7A5",
+    "text-align":"center",
+    "align-items": "center",
+    "justify-content": "center",
+    "height":"500px",
+    "width":"525px",
+    // "border-radius":"5%",
+    "border":"3px solid #87C7A5",
+    "margin":"0px 10px 10px 10px",
+    "z-index":"4"
+  }
+  let cssHelpBtn={
+    "position":"absolute",
+    "color":"#87C7A5",
+    "top":"20px",
+    "left":"350px",
+    "font-size":"1em",
+    "height":"1.2em",
+    "width":"80px",
+    "border":"1px solid #87C7A5",
     "text-align":"left",
     "margin":"0 1px 0 1px"
   }

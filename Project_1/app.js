@@ -276,6 +276,8 @@ const game2user_print=(player)=>{
   }
   const $endTurnBtn=$("<div>").css(cssGame2UserEndTurn).appendTo("#game2user").text("end turn");
     $endTurnBtn.attr("id","endTurnBtn").on("click",()=>{
+      isDiscarding=false; //if discard is on, turn it off
+      $("#discardBtn").css(cssGame2UserDiscard);
       dbg("218.End turn clicked |hand.length:"+player.hand.length);
       if(player.hand.length<8){
         if(whoseTurnIsIt==1){whoseTurnIsIt=2;}
@@ -288,10 +290,16 @@ const game2user_print=(player)=>{
     });
   const $discardBtn=$("<div>").css(cssGame2UserDiscard).appendTo("#game2user").text("discard");
   $discardBtn.attr("id","discardBtn").on("click",(e)=>{
+    if(isDiscarding==false){
     $("#game2userText").text("Carefully click each card you wish to discard. They are gone forever.");
     $("#discardBtn").css(cssDiscardActive);
     isDiscarding=true;
     dbg("222.discard clicked");
+    }
+    else{
+      isDiscarding=false;
+      $("#discardBtn").css(cssGame2UserDiscard);
+    }
   });
 }
 const buyCardBack=(player)=>{
@@ -327,15 +335,18 @@ const isWinning=()=>{
     else{
       alert("A perfect tie!");
     }
+    clearInterval(timerId);
   }
   else if(player1won){
     alert("Player 1 won!");
+    clearInterval(timerId);
   }
   else if(player2won){
     alert("Player 2 won!");
+    clearInterval(timerId);
   }
   else{}//nothing
-  clearInterval(timerId);
+
 }
 const rTrueIfWon=(player)=>{
   let numCompletions=0;

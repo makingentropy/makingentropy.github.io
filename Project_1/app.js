@@ -355,14 +355,16 @@ const rTrueIfWon=(player)=>{
   }
 }
 const inHelp=()=>{
-  const helptext="S t r a i g h t  -to-  P o w e r<br><br>How to play:<br><br>"+
+  const helptext="S t r a i g h t  -to-  P o w e r<br>MVP version<br><br>How to play:<br><br>"+
   "[Win]<br>* build 3 straights from A to K before your opponent.<br>"+
   "* If both players win in the same round, the highest score wins.<br><br>"+
   "[Score Points]<br>* +3 pts at the beginning of each turn when you autodraw 3 cards,<br>"+
   "* +1 pts if you take an extra draw of 3 cards by clicking the draw pile.<br>"+
   "* You may take one extra draw of 3 cards per turn if you choose<br>"+
   "* -1 pts penalty for every card you discard<br><br>"+
-  "[Shop]<br>* All discarded cards go to the shop pile. You may buy them back for -5 pts<br><br><br>"+
+  "[Shop]<br>* All discarded cards go to the shop pile. You may buy them back for -5 pts<br><br>"+
+  "[Tips]<br>* A clickable arrow will appear after you click on your card, if it's playable"+
+  "<br><br><br>"+
   "- click to close -"
   const $helpCard=$("<div>").attr("id","helpCard").css(cssHelp).appendTo($("#board")).append(helptext);
   $helpCard.on("click",()=>{
@@ -798,6 +800,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
 
 // while(isGameOn){
   whoseTurnIsIt=1;
+  inHelp();
 //-------------------------Game loop vvv
   dbg("////♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠s t a r t♥ ♦ ♣ ♠ ♥ ♦ ♣////");
   turn(player1); //starting game with player1

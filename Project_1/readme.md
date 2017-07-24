@@ -78,9 +78,10 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 - (against myself) in 16 rounds.
 
 ##### spoilers:
-- greater risk to end game by taking early extra draws, but better chance of finishing first
-- more points in late game when you need them, if you avoid extra draw.
-- if you have to discard, discard highest cards and buy them back at the end when store is full of only high cards.
+- greater risk to end game by taking extra draws, but better chance of finishing first
+- more points in late game when you need them, if you avoid extra draws.
+- if you have to discard, discard highest cards and buy them back at the end when they're needed & when store is full of only high cards.
+- better to buy many cards at once so that each successive card will have a progressively higher chance of being desired card
 ---
 ---
 

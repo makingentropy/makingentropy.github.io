@@ -758,7 +758,7 @@ const inHelp=()=>{
   let cssHelp={
     "position":"absolute",
     "top":"20px",
-    "left":"10px",
+    "left":"8px",
     "display":"flex",
     "background-color":"#002200",
     "color":"#87C7A5",
@@ -776,12 +776,13 @@ const inHelp=()=>{
     "position":"absolute",
     "color":"#87C7A5",
     "top":"20px",
-    "left":"350px",
+    "left":"450px",
     "font-size":"1em",
     "height":"1.2em",
     "width":"80px",
+    "border-radius":"10%",
     "border":"1px solid #87C7A5",
-    "text-align":"left",
+    "text-align":"center",
     "margin":"0 1px 0 1px"
   }
 

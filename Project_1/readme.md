@@ -85,9 +85,20 @@ After completion, I lost 2 lost games, figured out what I thought was a good str
 ---
 ---
 
-## DESIGN NOTES FOR PROJECT ONE
+## DEVELOPER NOTES FOR PROJECT ONE
 
+File Structure
+---
+My file structure is:
+Project_1 - (Parent folder)
+- images/ orangewood.jpg, redWood.jpg (image repository)
+- app.js (all js, minus the jquery library which is on a cdn)
+- index.html (the html file that links everything together
+- style.css (blank because all my css is generated and applied by app.js )
+- readme.md (this file)
 
+App Structure
+---
 I structured my app.js for personal readability and ease of use, though I gave up in the `FUNCTIONS` section at some point in the interest of speed (and I think it shows in that another coder coming into it might be somewhat befuddled). There are at least a couple of functions in that section that should be moved to `HELPER FUNCTIONS`, and I might could break down some of the other functions.
 
 Ideally, I think I should want all the big drivers of the action grouped at the top and then work my way down to secondary and tertiary function groups so that I can easily navigate my script. This idealized structure broke down somewhat as I started cowboy coding against time, but I held the idea together enough to finish without too much headache. However, I would want to restructure to be a little more strict if this was a few hundred lines longer.
@@ -120,8 +131,11 @@ Broad Code Structure of app.js:
 `ONLOAD END`<br>
 
 ---
-## additional design notes
+## additional design notes 1
 I tried to structure app.js with the idea that all the action was just taking place between arrays and variables stored in player objects. The graphical elements just served to visualize this, so I tried to stay away from relying on data stored in divs to govern any part of the game.  This allowed me to put most of my div creation functionality (including all the senior-level ancestors) in a single function (initBoard). Therefore, rather than moving divs around, I could simply discard the board after every play and rebuild it instantly based on the new values in the player objects. I believe this saved me a lot of headache- the main hurdle was getting all the logic working. However, I did not overthink the initial design because I thought what needed to happen seemed straightforward and that means there are areas that could be broken down better and put into a more navigable order along the lines of my tiered layout. There is plenty of room to streamline the code for readability.
+
+##additional design notes 2
+The original game was much more rule-intensive and had many more particular conditions for play.  Cathleen wisely told me to just fulfill the minimum requirements of a functional game. I did and, after playtesting, came up with something slightly different with the core concept I had preserved from the original design. This difference was in order to accommodate a scoring aspect, and to make that aspect useful (you need points to buy your cards back, and to use as a tiebreaker).  Since I am fulfilling the minimum functionality, I found that suits were no longer necessary to have a compelling game and therefore did not institute them.  After many playtests, I've found that the sccoring system could be tweaked to produce a shorter game but I will leave it be at this point so close to deadline.
 
 ## tangential journeys
 At one point I sought to construct a function that would operate with a set of different rules dependent upon how many arguments I fed it (a la how text() can either input or return depending how you use it). This led me to find the `arguments` javascript object. I was excited but then couldn't get it to work. It wasn't until the next day, when I had already shifted my approach, that I revisted the topic on a call with another student and realized that the arrow style is what's breaking it. What is functionally different under the hood between:

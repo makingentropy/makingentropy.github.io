@@ -335,6 +335,7 @@ const isWinning=()=>{
     alert("Player 2 won!");
   }
   else{}//nothing
+  clearInterval(timerId);
 }
 const rTrueIfWon=(player)=>{
   let numCompletions=0;
@@ -355,14 +356,17 @@ const rTrueIfWon=(player)=>{
 const inHelp=()=>{
   const helptext="S t r a i g h t  -to-  P o w e r<br>MVP version<br><br>How to play:<br><br>"+
   "[Win]<br>* build 3 straights from A to K before your opponent.<br>"+
+  "* Play A in the middle to start a new straight. You start with one in play.<br>"+
+  "* the first and last cards of a straight will be visible. <br>"+
   "* If both players win in the same round, the highest score wins.<br><br>"+
-  "[Score Points]<br>* +3 pts at the beginning of each turn when you autodraw 3 cards,<br>"+
+  "[Score Points]<br>* +3 pts at the beginning of each turn <br>"+
   "* +1 pts if you take an extra draw of 3 cards by clicking the draw pile.<br>"+
   "* You may take one extra draw of 3 cards per turn if you choose<br>"+
   "* -1 pts penalty for every card you discard<br><br>"+
   "[Shop]<br>* All discarded cards go to the shop pile. You may buy them back for -5 pts<br><br>"+
-  "[Tips]<br>* A clickable arrow will appear after you click on your card, if it's playable"+
-  "<br><br><br>"+
+  "[Tips]<br>* Your first 3 cards are automatically drawn to your hand before your turn<br>"+
+  "* A clickable arrow will appear after you click on your card, if it's playable"+
+  "<br><br>"+
   "- click to close -"
   const $helpCard=$("<div>").attr("id","helpCard").css(cssHelp).appendTo($("#board")).append(helptext);
   $helpCard.on("click",()=>{
@@ -804,7 +808,7 @@ player2.deck=rCreateDeckArr(); //dbg(deck2);
 //-------------------------Game loop vvv
   dbg("////♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠s t a r t♥ ♦ ♣ ♠ ♥ ♦ ♣////");
   turn(player1); //starting game with player1
-  let G=setInterval(()=>{
+  let timerId=setInterval(()=>{
     if(endTurnClicked==true)
     {
       dbg("♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♠ ♥ ♦ ♣ ♠");

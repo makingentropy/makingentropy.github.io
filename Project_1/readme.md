@@ -70,9 +70,8 @@ If one or both players have completed 3 straights by the END of a round the winn
 
 
 ##### Things to fix:
--discard cannot be toggled off if user changed their mind
--blank cards are dealt from the deck at the end.
--player should lose if no more deck, and not enough points to buy cards, and no more cards to play
+- player should be able to enter their name.
+- Game should be play tested with a variety of scoring methods to see what produces best play
 
 ##### side notes:
 After completion, I lost 2 lost games, figured out what I thought was a good strategy, and won

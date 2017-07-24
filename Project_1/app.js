@@ -440,8 +440,8 @@ const inHelp=()=>{
     points:0
   };
   const buyDiscardPrice=5;
-  const earnFirstDraw=3;
-  const earnSecondDraw=1;
+  const earnFirstDraw=3; //updated in turn()
+  const earnSecondDraw=1; //updated in $drawpile .on()
   let isGameOn=true;
   let isInHelp=true;
   let whoseTurnIsIt=1;

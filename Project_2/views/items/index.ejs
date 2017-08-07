@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>item Site</title>
+    <link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<header>
+			<h1>items</h1>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/items/new">Create a new item</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<h2>List of items</h2>
+			<div class="containerBox">
+				<% for(let i = 0; i < items.length; i++){ %>
+					<div class="itemBox">
+						<div class="item">
+							<a href="/items/<%=items[i]._id%>"><img src="<%=items[i].link%>" alt="<%=items[i].name%>"/></a>
+						</div>
+					</div>
+				<% } %>
+			</div>
+		</main>
+	</body>
+</html>

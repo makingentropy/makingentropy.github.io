@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<header>
+			<h1>Create a item</h1>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/items">items Index</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<form action="/items" method="POST">
+				<select name="userId">
+					<!-- name is the property that req.body will search for on POST -->
+					<%for(let i=0; i<users.length; i++){%>
+						<option value="<%=users[i].id%>"><%=users[i].name%></option>
+					<%}%>
+				</select><br>
+				<input placeholder="name" type="text" name="name"/><br/>
+        <input placeholder="link" type="text" name="link" /><br/>
+				<textarea placeholder="description" name="body"></textarea><br/>
+				<input type="submit" value="Publish item"/>
+			</form>
+		</main>
+	</body>
+</html>

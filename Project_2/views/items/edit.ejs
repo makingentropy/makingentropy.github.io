@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<header>
+			<h1>Edit <%=item.title%></h1>
+      <img src="<%=item.link%>"/>
+      <%=item.body%>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/items">item Index</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<h2>item Attributes:</h2>
+			<form action="/items/<%=item._id%>?_method=PUT" method="post">
+				<input placeholder="name" type="text" name="name" value="<%=item.name%>"/><br/>
+				<input placeholder="link" type="text" name="link" value="<%=item.link%>"/><br/>
+				<textarea placeholder="description" name="body"><%=item.body%></textarea><br/>
+				<input type="submit" value="Update Item"/>
+			</form>
+		</main>
+	</body>
+</html>

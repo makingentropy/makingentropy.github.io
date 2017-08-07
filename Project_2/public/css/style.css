@@ -1,0 +1,26 @@
+.lightBox{
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.photoBox{
+  width:150px;
+  height: 150px;
+  width:150px;
+  height: 150px;
+  border: 1px solid #CCCCCC;
+  margin-left: 3px;
+}
+.photo{
+  align-content: center;
+}
+img{
+  width:90%;
+  height:90%;
+  margin-left: 5%;
+  margin-top: 10%;
+
+}
+body{
+  background-color: white;
+}

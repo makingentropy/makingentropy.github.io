@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<header>
+			<img src="<%=item.link%>"/><br>
+      <%=item.body%>
+      <br>
+			by:
+			<a href="/users/<%=user._id%>"><%=user.name%></a>
+			<section>
+			    <form action="/items/<%=item._id%>?_method=DELETE" method="post">
+			        <input type="submit" value="Delete item"/>
+			    </form>
+			</section>
+			<section>
+			    <a href="/items/<%=item._id%>/edit">Edit</a>
+			</section>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/items">items Index</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<!-- <%=user%> -->
+			<section>
+				<h2>user Atrributes:</h2>
+				<ul>
+					<li>Name: <%=user.name%></li>
+				</ul>
+			</section>
+			<section>
+				<h2>items by This user:</h2>
+				<div class="containerBox">
+
+					<% for(let i=0; i<user.items.length;i++){ %>
+						<div class="itemBox">
+							<div class="item">
+								<a href="/items/<%=user.items[i].id%>">
+									<img src="<%=user.items[i].link%>" alt="<%=user.items[i].name%>"/>
+								</a>
+							</div>
+						</div>
+					<%}%>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

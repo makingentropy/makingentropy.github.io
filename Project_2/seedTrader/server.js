@@ -10,7 +10,7 @@ app.use(express.static("public"));
 const usersController=require("./controllers/users.js");
 app.use("/users",usersController);
 const itemsController=require("./controllers/items.js");
-app.use("items",itemsController);
+app.use("/items",itemsController);
 
 app.get("/",(req,res)=>{
   res.render("index.ejs");

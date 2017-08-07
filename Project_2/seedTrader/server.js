@@ -16,10 +16,16 @@ app.get("/",(req,res)=>{
   res.render("index.ejs");
 })
 
-mongoose.connect("mongodb://localhost:27017/blog");
+const mongoUri=process.env.MONGODB_URI || "mongodb://localhost:27017/project2"
+mongoose.connect(mongoUri);
+
+mongoose.connect("mongodb://localhost:27017/project2");
 mongoose.connection.once("open",()=>{
   console.log("connected to mongo");
 })
+
+const port=process.env.PORT || 3000;
+
 app.listen(3000,()=>{
   console.log("listening on 3000");
 })

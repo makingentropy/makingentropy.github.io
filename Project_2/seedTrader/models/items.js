@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 
 const itemSchema= mongoose.Schema({
+  name: String,
   link: String,
   count: String,
   body: String
